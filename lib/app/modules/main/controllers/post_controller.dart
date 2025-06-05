@@ -28,7 +28,6 @@ class PostController extends GetxController {
   final Rx<XFile?> _capturedImageFile = Rx<XFile?>(null);
   XFile? get capturedImageFile => _capturedImageFile.value;
 
-  Timer? _mainTimer;
   var currentLocation = Rx<LatLng?>(null);
   String _curLat = '';
   String _curLong = '';
@@ -113,7 +112,7 @@ class PostController extends GetxController {
       permission = await Geolocator.requestPermission();
     }
 
-    _mainTimer = Timer.periodic(
+    Timer.periodic(
       Duration(seconds: 1),
       (t) async {
         try {
@@ -329,6 +328,15 @@ class PostController extends GetxController {
       );
       return;
     }
+    if (currentLocation.value == null ||
+        (_curLat.isEmpty || _curLong.isEmpty)) {
+      Get.snackbar(
+        'Error Lokasi',
+        'Tidak dapat menentukan lokasi saat ini. Pastikan GPS aktif dan izin diberikan.',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+      return;
+    }
 
     isLoading.value = true;
 
@@ -339,6 +347,31 @@ class PostController extends GetxController {
         latitude: _curLat,
         longitude: _curLong,
       );
+
+      String timeZoneName = 'N/A';
+      DateTime postCreatedAt = DateTime.now();
+
+      final timezoneResponse = await _apiService.getTimeZone(
+        latitude: double.tryParse(_curLat) ?? 0.0,
+        longitude: double.tryParse(_curLong) ?? 0.0,
+      );
+
+      if (timezoneResponse != null && timezoneResponse['time_zone'] != null) {
+        timeZoneName = timezoneResponse['time_zone']['name'] ?? 'N/A';
+        String dateTimeString = timezoneResponse['time_zone']['date_time'];
+        try {
+          postCreatedAt = DateTime.parse(
+            dateTimeString.replaceAll(' ', 'T'),
+          );
+        } catch (e) {
+          postCreatedAt = DateTime.now();
+        }
+      } else {
+        print(
+          'Failed to get timezone from API, using current local time and N/A timezone.',
+        );
+      }
+
       final newPost = Post(
         uid: _authService.currentUser!.uid!,
         latitude: double.parse(_curLat),
@@ -348,7 +381,8 @@ class PostController extends GetxController {
         postDesc: descController.text,
         postPrice: price,
         postImage: capturedImageFile!.path,
-        createdAt: DateTime.now(),
+        createdAt: postCreatedAt,
+        timeZone: timeZoneName,
       );
 
       final postId = await _dbHelper.insertPost(newPost);
@@ -357,8 +391,7 @@ class PostController extends GetxController {
         await _showLocalNotification(
           'Postingan Berhasil!',
           'Postingan "${newPost.postTitle}" Anda telah berhasil dibagikan.',
-          payload:
-              postId.toString(), // Anda bisa meneruskan postId sebagai payload
+          payload: postId.toString(),
         );
         resetImage();
         titleController.clear();

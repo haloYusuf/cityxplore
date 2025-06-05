@@ -8,7 +8,7 @@ import 'package:cityxplore/app/data/models/saved_model.dart';
 class DbHelper {
   static Database? _database;
   static const String _databaseName = "cityxplore.db";
-  static const int _databaseVersion = 2;
+  static const int _databaseVersion = 1;
 
   // Nama tabel
   static const String _userTable = 'user';
@@ -29,8 +29,8 @@ class DbHelper {
       databasePath,
       version: _databaseVersion,
       onCreate: _onCreate,
-      onConfigure: _onConfigure, // Tambahkan onConfigure untuk foreign keys
-      onUpgrade: _onUpgrade, // Tambahkan ini jika versi database > 1
+      onConfigure: _onConfigure,
+      onUpgrade: _onUpgrade,
     );
   }
 
@@ -41,7 +41,8 @@ class DbHelper {
 
   _onCreate(Database db, int version) async {
     // Buat tabel User
-    await db.execute('''
+    await db.execute(
+      '''
       CREATE TABLE $_userTable(
         uid INTEGER PRIMARY KEY AUTOINCREMENT,
         username TEXT NOT NULL UNIQUE,
@@ -51,10 +52,11 @@ class DbHelper {
         createdAt TEXT NOT NULL,
         updatedAt TEXT
       )
-    ''');
+    ''',
+    );
 
-    // Modifikasi tabel Post: Tambahkan kolom postImage
-    await db.execute('''
+    await db.execute(
+      '''
       CREATE TABLE $_postTable(
         postId INTEGER PRIMARY KEY AUTOINCREMENT,
         uid INTEGER NOT NULL,
@@ -64,14 +66,17 @@ class DbHelper {
         postTitle TEXT NOT NULL,
         postDesc TEXT,
         postPrice REAL NOT NULL,
-        postImage TEXT, -- BARU: Kolom untuk path gambar postingan
+        postImage TEXT,
         createdAt TEXT NOT NULL,
+        timeZone TEXT,
         FOREIGN KEY (uid) REFERENCES $_userTable (uid) ON DELETE CASCADE
       )
-    ''');
+    ''',
+    );
 
     // Buat tabel Like
-    await db.execute('''
+    await db.execute(
+      '''
       CREATE TABLE $_likeTable(
         uid INTEGER NOT NULL,
         postId INTEGER NOT NULL,
@@ -79,10 +84,12 @@ class DbHelper {
         FOREIGN KEY (uid) REFERENCES $_userTable (uid) ON DELETE CASCADE,
         FOREIGN KEY (postId) REFERENCES $_postTable (postId) ON DELETE CASCADE
       )
-    ''');
+    ''',
+    );
 
     // Buat tabel Saved
-    await db.execute('''
+    await db.execute(
+      '''
       CREATE TABLE $_savedTable(
         uid INTEGER NOT NULL,
         postId INTEGER NOT NULL,
@@ -90,10 +97,9 @@ class DbHelper {
         FOREIGN KEY (uid) REFERENCES $_userTable (uid) ON DELETE CASCADE,
         FOREIGN KEY (postId) REFERENCES $_postTable (postId) ON DELETE CASCADE
       )
-    ''');
+    ''',
+    );
   }
-
-
 
   Future _onUpgrade(Database db, int oldVersion, int newVersion) async {
     if (oldVersion < 2) {
@@ -191,7 +197,8 @@ class DbHelper {
 
   Future<int> addLike(Like like) async {
     Database db = await database;
-    return await db.insert(_likeTable, like.toMap(), conflictAlgorithm: ConflictAlgorithm.replace);
+    return await db.insert(_likeTable, like.toMap(),
+        conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
   Future<int> removeLike(int uid, int postId) async {
@@ -226,7 +233,8 @@ class DbHelper {
 
   Future<int> addSaved(Saved saved) async {
     Database db = await database;
-    return await db.insert(_savedTable, saved.toMap(), conflictAlgorithm: ConflictAlgorithm.replace);
+    return await db.insert(_savedTable, saved.toMap(),
+        conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
   Future<int> removeSaved(int uid, int postId) async {

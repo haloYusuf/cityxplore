@@ -83,8 +83,11 @@ class PostView extends StatelessWidget {
                                   width: double.infinity,
                                   height: 325,
                                   color: Colors.grey[300],
-                                  child: const Icon(Icons.broken_image,
-                                      size: 50, color: Colors.grey),
+                                  child: const Icon(
+                                    Icons.broken_image,
+                                    size: 50,
+                                    color: Colors.grey,
+                                  ),
                                 ),
                               ),
                             ),
@@ -212,7 +215,11 @@ class PostView extends StatelessWidget {
                         controller: controller.priceController,
                         keyboardType: TextInputType.number,
                         textInputAction: TextInputAction.next,
-                        enabled: !controller.isFree.value,
+                        onChanged: (v) {
+                          if (controller.isFree.value) {
+                            controller.priceController.text = '0';
+                          }
+                        },
                         decoration: InputDecoration(
                           fillColor: Colors.white,
                           filled: true,

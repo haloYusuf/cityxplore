@@ -11,6 +11,7 @@ class Post {
   double postPrice;
   String? postImage;
   DateTime createdAt;
+  String? timeZone;
 
   Post({
     this.postId,
@@ -23,6 +24,7 @@ class Post {
     required this.postPrice,
     this.postImage,
     required this.createdAt,
+    this.timeZone,
   });
 
   factory Post.fromMap(Map<String, dynamic> map) {
@@ -37,6 +39,7 @@ class Post {
       postPrice: map['postPrice'],
       postImage: map['postImage'],
       createdAt: DateTime.parse(map['createdAt']),
+      timeZone: map['timeZone'],
     );
   }
 
@@ -52,6 +55,7 @@ class Post {
       'postPrice': postPrice,
       'postImage': postImage,
       'createdAt': createdAt.toIso8601String(),
+      'timeZone': timeZone,
     };
   }
 

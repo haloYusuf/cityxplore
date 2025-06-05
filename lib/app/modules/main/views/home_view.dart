@@ -120,6 +120,9 @@ class HomeView extends StatelessWidget {
                           child: PostCard(
                             post: post,
                             poster: poster,
+                            onItemTap: () => controller.goToPostDetail(
+                              post,
+                            ),
                             onLocationTap: () => controller.launchGoogleMaps(
                               post.latitude,
                               post.longitude,

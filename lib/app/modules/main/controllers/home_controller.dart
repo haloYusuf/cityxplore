@@ -7,6 +7,7 @@ import 'package:cityxplore/app/data/models/post_model.dart';
 import 'package:cityxplore/app/data/models/user_model.dart';
 import 'package:cityxplore/app/data/models/like_model.dart';
 import 'package:cityxplore/app/data/models/saved_model.dart';
+import 'package:shake/shake.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomeController extends GetxController {
@@ -24,6 +25,8 @@ class HomeController extends GetxController {
   final RxString searchQuery = ''.obs;
   final RxBool isSearching = false.obs;
 
+  ShakeDetector? _shakeDetector;
+
   @override
   void onInit() {
     super.onInit();
@@ -35,6 +38,16 @@ class HomeController extends GetxController {
     searchController.addListener(() {
       searchQuery.value = searchController.text;
     });
+    
+    _shakeDetector = ShakeDetector.autoStart(
+      onPhoneShake: (v) { 
+        Get.snackbar('Informasi', 'Memuat ulang postingan...', snackPosition: SnackPosition.TOP);
+        refreshPosts();
+      },
+      shakeSlopTimeMS: 500,
+      shakeCountResetTime: 3000,
+      minimumShakeCount: 1,
+    );
   }
 
   Future<void> fetchPostsAndUsers() async {
@@ -80,6 +93,13 @@ class HomeController extends GetxController {
       );
     }
     isLoading.value = false;
+  }
+
+  @override
+  void onClose() {
+    _shakeDetector?.stopListening();
+    searchController.dispose();
+    super.onClose();
   }
 
   void filterPosts() {
@@ -181,11 +201,6 @@ class HomeController extends GetxController {
     }
   }
 
-  void logout() {
-    _authService.logout();
-    Get.offAllNamed(RouteName.login);
-  }
-
   void toggleSearch() {
     isSearching.value = !isSearching.value;
     if (!isSearching.value) {
@@ -197,5 +212,14 @@ class HomeController extends GetxController {
   void clearSearch() {
     searchController.clear();
     searchQuery.value = '';
+  }
+
+  void goToPostDetail(Post post) {
+    Get.toNamed(RouteName.detailPost, arguments: post);
+  }
+
+  void logout() {
+    _authService.logout();
+    Get.offAllNamed(RouteName.login);
   }
 }
