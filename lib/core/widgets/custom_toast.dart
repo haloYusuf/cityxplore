@@ -10,12 +10,14 @@ class CustomToast extends StatefulWidget {
     required this.message,
     this.duration = const Duration(milliseconds: 500),
   });
-
   @override
-  _CustomToastState createState() => _CustomToastState();
+  State<StatefulWidget> createState() {
+    return _CustomToastState();
+  }
 }
 
-class _CustomToastState extends State<CustomToast> with SingleTickerProviderStateMixin {
+class _CustomToastState extends State<CustomToast>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
 
@@ -36,7 +38,7 @@ class _CustomToastState extends State<CustomToast> with SingleTickerProviderStat
   Future<void> _showToast() async {
     await _controller.forward();
     await Future.delayed(widget.duration);
-    await _controller.reverse(); 
+    await _controller.reverse();
     if (mounted) {
       Navigator.of(context).pop();
     }
@@ -59,7 +61,8 @@ class _CustomToastState extends State<CustomToast> with SingleTickerProviderStat
           child: Padding(
             padding: const EdgeInsets.only(bottom: 50.0),
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
               decoration: BoxDecoration(
                 color: Colors.black.withAlpha((0.7 * 255).round()),
                 borderRadius: BorderRadius.circular(30.0),
@@ -75,19 +78,20 @@ class _CustomToastState extends State<CustomToast> with SingleTickerProviderStat
     );
   }
 }
+
 void showCustomSuccessToast(String message) {
   OverlayEntry overlayEntry;
   overlayEntry = OverlayEntry(
     builder: (context) => CustomToast(message: message),
   );
-
-  // Tambahkan overlay ke pohon widget
+  
   if (Get.overlayContext != null) {
     Navigator.of(Get.overlayContext!).push(
       _ToastRoute(overlayEntry),
     );
   }
 }
+
 class _ToastRoute extends PageRouteBuilder {
   final OverlayEntry overlayEntry;
 
@@ -99,8 +103,10 @@ class _ToastRoute extends PageRouteBuilder {
               Animation<double> secondaryAnimation) {
             return overlayEntry.builder(context);
           },
-          transitionsBuilder: (BuildContext context, Animation<double> animation,
-              Animation<double> secondaryAnimation, Widget child) {
+          transitionsBuilder: (BuildContext context,
+              Animation<double> animation,
+              Animation<double> secondaryAnimation,
+              Widget child) {
             return child;
           },
         );

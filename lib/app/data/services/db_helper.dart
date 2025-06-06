@@ -198,6 +198,22 @@ class DbHelper {
     });
   }
 
+  Future<Post?> getPostById(int postId) async {
+    final db = await database;
+
+    final List<Map<String, dynamic>> maps = await db.query(
+      _postTable,
+      where: 'postId = ?',
+      whereArgs: [postId],
+    );
+    
+    if (maps.isNotEmpty) {
+      return Post.fromMap(maps.first);
+    } else {
+      return null;
+    }
+  }
+
   Future<int> deletePost(int postId) async {
     Database db = await database;
     return await db.delete(
@@ -290,6 +306,5 @@ class DbHelper {
     await db.delete(_savedTable);
     await db.delete(_postTable);
     await db.delete(_userTable);
-    print("Semua tabel telah dikosongkan.");
   }
 }

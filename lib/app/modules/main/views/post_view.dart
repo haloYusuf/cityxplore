@@ -4,7 +4,7 @@ import 'package:camera/camera.dart';
 import 'package:cityxplore/app/modules/main/controllers/post_controller.dart';
 import 'package:cityxplore/core/utils/price_input_formatter.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart'; // Import untuk TextInputFormatter
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class PostView extends StatelessWidget {
@@ -76,7 +76,7 @@ class PostView extends StatelessWidget {
                   textInputAction: TextInputAction.next,
                 ),
                 const SizedBox(height: 24),
-                _buildPriceInputField(), // Bagian ini yang dimodifikasi
+                _buildPriceInputField(),
                 const SizedBox(height: 24),
                 _buildTextField(
                   label: 'Deskripsi Singkat',
@@ -193,7 +193,8 @@ class PostView extends StatelessWidget {
                       FloatingActionButton(
                         heroTag: 'switchCameraBtn',
                         mini: true,
-                        backgroundColor: Colors.white.withOpacity(0.5),
+                        backgroundColor:
+                            Colors.white.withAlpha((0.5 * 255).round()),
                         onPressed: controller.switchCamera,
                         child:
                             const Icon(Icons.cameraswitch, color: Colors.blue),
@@ -267,7 +268,7 @@ class PostView extends StatelessWidget {
     int maxLines = 1,
     int? maxLength,
     ValueChanged<String>? onChanged,
-    List<TextInputFormatter>? inputFormatters, // Tambahkan parameter ini
+    List<TextInputFormatter>? inputFormatters,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -281,7 +282,7 @@ class PostView extends StatelessWidget {
           maxLines: maxLines,
           maxLength: maxLength,
           onChanged: onChanged,
-          inputFormatters: inputFormatters, // Gunakan di sini
+          inputFormatters: inputFormatters,
           decoration: InputDecoration(
             fillColor: Colors.white,
             filled: true,
@@ -310,11 +311,9 @@ class PostView extends StatelessWidget {
                   keyboardType: TextInputType.number,
                   textInputAction: TextInputAction.next,
                   enabled: !controller.isFree.value,
-                  // Terapkan PriceInputFormatter di sini
                   inputFormatters: [
-                    FilteringTextInputFormatter
-                        .digitsOnly, // Hanya izinkan digit
-                    PriceInputFormatter(), // Formatter untuk format angka
+                    FilteringTextInputFormatter.digitsOnly,
+                    PriceInputFormatter(),
                   ],
                   decoration: InputDecoration(
                     fillColor: Colors.white,
@@ -341,8 +340,10 @@ class PostView extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 12,
+                  ),
                 ),
                 child: Text(
                   controller.isFree.value ? 'Tidak Gratis' : 'Gratis',

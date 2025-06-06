@@ -33,8 +33,7 @@ class HomeController extends GetxController {
   void onInit() {
     super.onInit();
     fetchPostsAndUsers();
-
-    // Reaksi terhadap perubahan data utama atau query pencarian
+    
     debounce(searchQuery, (_) => filterPosts(), time: const Duration(milliseconds: 300));
     ever(posts, (_) => filterPosts());
 
@@ -128,7 +127,6 @@ class HomeController extends GetxController {
   }
 
   Future<void> refreshPosts() async {
-    // Reset status loading
     isLoading.value = true;
     await fetchPostsAndUsers();
   }
@@ -170,7 +168,6 @@ class HomeController extends GetxController {
         );
       }
     } catch (e) {
-      // Revert UI if DB operation fails
       likedPosts[postId] = currentlyLiked;
       likedPosts.refresh();
       showErrorMessage(

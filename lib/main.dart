@@ -1,3 +1,4 @@
+import 'package:cityxplore/app/data/models/post_model.dart';
 import 'package:cityxplore/app/data/services/auth_service.dart';
 import 'package:cityxplore/app/routes/route_name.dart';
 import 'package:cityxplore/app/routes/route_page.dart';
@@ -61,9 +62,45 @@ void onDidReceiveLocalNotification(
 
 void onDidReceiveNotificationResponse(
     NotificationResponse notificationResponse) async {
-  final String? payload = notificationResponse.payload;
-  if (notificationResponse.payload != null) {
-    debugPrint('notification payload: $payload');
+  final dbHelper = Get.find<DbHelper>();
+  // 1. Periksa apakah ada payload
+  if (notificationResponse.payload != null &&
+      notificationResponse.payload!.isNotEmpty) {
+    debugPrint('Notification payload: ${notificationResponse.payload}');
+
+    final int? postId = int.tryParse(notificationResponse.payload!);
+
+    if (postId != null) {
+      final Post? post = await dbHelper.getPostById(postId);
+
+      if (post != null) {
+        Get.toNamed(RouteName.detailPost, arguments: post);
+      } else {
+        Get.snackbar(
+          'Error',
+          'Postingan tidak ditemukan setelah mengetuk notifikasi.',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+        );
+      }
+    } else {
+      Get.snackbar(
+        'Error',
+        'Data notifikasi tidak valid.',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+    }
+  } else {
+    Get.snackbar(
+      'Info',
+      'Notifikasi tidak memiliki informasi detail.',
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: Colors.blueGrey,
+      colorText: Colors.white,
+    );
   }
 }
 

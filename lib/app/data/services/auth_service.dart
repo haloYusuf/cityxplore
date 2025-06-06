@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:cityxplore/app/data/models/user_model.dart';
 import 'package:cityxplore/app/data/services/db_helper.dart';
 import 'dart:io';
-import 'package:get_storage/get_storage.dart'; // Import GetStorage
+import 'package:get_storage/get_storage.dart';
 
 class AuthService extends GetxService {
   final DbHelper _dbHelper = Get.find<DbHelper>();
@@ -12,19 +12,15 @@ class AuthService extends GetxService {
   User? get currentUser => _currentUser.value;
   Rx<User?> get currentUserRx => _currentUser;
 
-  final GetStorage _box = GetStorage(); // Instance GetStorage
-
-  // Kunci untuk menyimpan UID di GetStorage
+  final GetStorage _box = GetStorage();
   static const String _userUidKey = 'current_user_uid';
 
   Future<AuthService> init() async {
-    // Coba baca UID dari GetStorage
     final int? savedUid = _box.read<int?>(_userUidKey);
     if (savedUid != null) {
       final user = await _dbHelper.getUserById(savedUid);
       if (user != null) {
         _currentUser.value = user;
-        print('User ${user.username} otomatis login dari sesi sebelumnya.');
       } else {
         _box.remove(_userUidKey);
       }
@@ -59,8 +55,6 @@ class AuthService extends GetxService {
 
     String? photoPath;
     if (photo != null) {
-      // Dalam aplikasi nyata, Anda akan menyalin file ke lokasi permanen
-      // Untuk demo, kita asumsikan path file yang dipilih akan disimpan
       photoPath = photo.path;
     }
 
@@ -76,7 +70,6 @@ class AuthService extends GetxService {
       final uid = await _dbHelper.insertUser(newUser);
       if (uid > 0) {
         _currentUser.value = newUser..uid = uid;
-        // Simpan UID ke GetStorage setelah register sukses
         _box.write(_userUidKey, uid);
         Get.snackbar('Sukses', 'Registrasi Berhasil!',
             snackPosition: SnackPosition.BOTTOM,
@@ -89,7 +82,6 @@ class AuthService extends GetxService {
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.red,
           colorText: Colors.white);
-      print('Error during registration: $e');
     }
     return false;
   }
@@ -108,7 +100,6 @@ class AuthService extends GetxService {
 
     if (PasswordUtil.verifyPassword(password, user.password)) {
       _currentUser.value = user;
-      // Simpan UID ke GetStorage setelah login sukses
       _box.write(_userUidKey, user.uid);
       Get.snackbar('Login Sukses', 'Selamat datang, ${user.username}!',
           snackPosition: SnackPosition.BOTTOM,
@@ -124,7 +115,6 @@ class AuthService extends GetxService {
 
   void logout() {
     _currentUser.value = null;
-    // Hapus UID dari GetStorage saat logout
     _box.remove(_userUidKey);
     Get.snackbar('Logout', 'Anda telah keluar.',
         snackPosition: SnackPosition.BOTTOM);

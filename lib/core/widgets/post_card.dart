@@ -3,9 +3,8 @@ import 'dart:io'; // Import untuk File
 import 'package:flutter/material.dart';
 import 'package:cityxplore/app/data/models/post_model.dart';
 import 'package:cityxplore/app/data/models/user_model.dart';
-import 'package:get/get.dart'; // Untuk Get.snackbar
+import 'package:get/get.dart';
 
-// Optional: For better date formatting
 import 'package:intl/intl.dart';
 
 class PostCard extends StatelessWidget {
@@ -35,34 +34,31 @@ class PostCard extends StatelessWidget {
     return GestureDetector(
       onTap: onItemTap,
       child: Card(
-        // Menggunakan Card widget untuk efek elevasi dan rounded corners bawaan
-        elevation: 4, // Sedikit elevasi
+        elevation: 4,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
-        clipBehavior: Clip.antiAlias, // Penting untuk clipping gambar
+        clipBehavior: Clip.antiAlias,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            _buildPostImageSection(), // Bagian gambar postingan
+            _buildPostImageSection(),
             Padding(
-              padding: const EdgeInsets.all(
-                  12), // Padding sedikit lebih besar dan konsisten
+              padding: const EdgeInsets.all(12),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  _buildPosterInfo(), // Info pembuat postingan
-                  const SizedBox(height: 12), // Jarak antar bagian
-                  _buildPostTitle(), // Judul postingan
+                  _buildPosterInfo(),
+                  const SizedBox(height: 12),
+                  _buildPostTitle(),
                   const SizedBox(height: 8),
-                  _buildLocationInfo(), // Info lokasi
+                  _buildLocationInfo(),
                   const SizedBox(height: 8),
-                  _buildPostDescription(), // Deskripsi postingan
-                  const SizedBox(height: 12), // Jarak sebelum divider
-                  const Divider(
-                      height: 1, color: Colors.grey), // Menggunakan Divider
-                  _buildActionButtons(), // Tombol like, comment, save
+                  _buildPostDescription(),
+                  const SizedBox(height: 12),
+                  const Divider(height: 1, color: Colors.grey),
+                  _buildActionButtons(),
                 ],
               ),
             ),
@@ -72,7 +68,6 @@ class PostCard extends StatelessWidget {
     );
   }
 
-  /// Membangun bagian gambar postingan.
   Widget _buildPostImageSection() {
     return SizedBox(
       height: 200,
@@ -83,24 +78,20 @@ class PostCard extends StatelessWidget {
               topLeft: Radius.circular(12),
               topRight: Radius.circular(12),
             ),
-            // Menggunakan Image.file jika postImageFile tidak null, jika tidak tampilkan placeholder
-            child: post.postImageFile != null &&
-                    File(post.postImage!).existsSync() // Cek keberadaan file
-                ? Image.file(
-                    File(post
-                        .postImage!), // Gunakan post.postImage (string path)
-                    width: double.infinity,
-                    height: 200,
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) =>
-                        _buildImagePlaceholder(Icons
-                            .broken_image), // Placeholder jika gambar rusak
-                  )
-                : _buildImagePlaceholder(
-                    Icons.image), // Placeholder jika tidak ada gambar
+            child:
+                post.postImageFile != null && File(post.postImage!).existsSync()
+                    ? Image.file(
+                        File(post.postImage!),
+                        width: double.infinity,
+                        height: 200,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) =>
+                            _buildImagePlaceholder(Icons.broken_image),
+                      )
+                    : _buildImagePlaceholder(Icons.image),
           ),
           Positioned(
-            top: 8, // Sedikit menjauh dari ujung
+            top: 8,
             right: 8,
             child: Container(
               padding: const EdgeInsets.symmetric(
@@ -110,8 +101,7 @@ class PostCard extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
                 color: post.postPrice == 0
-                    ? Colors.green.withAlpha(
-                        (0.7 * 255).round()) // Opacity yang lebih jelas
+                    ? Colors.green.withAlpha((0.7 * 255).round())
                     : Colors.blue.withAlpha((0.7 * 255).round()),
               ),
               child: Row(
@@ -122,11 +112,11 @@ class PostCard extends StatelessWidget {
                     size: 18,
                     color: Colors.white,
                   ),
-                  const SizedBox(width: 4), // Jarak lebih baik
+                  const SizedBox(width: 4),
                   Text(
                     post.postPrice == 0
                         ? 'Gratis'
-                        : 'Rp ${NumberFormat.compactSimpleCurrency(locale: 'id_ID', name: '').format(post.postPrice)}', // Format mata uang
+                        : 'Rp ${NumberFormat.compactSimpleCurrency(locale: 'id_ID', name: '').format(post.postPrice)}',
                     style: const TextStyle(
                       fontSize: 14,
                       color: Colors.white,
@@ -142,7 +132,6 @@ class PostCard extends StatelessWidget {
     );
   }
 
-  /// Membangun placeholder gambar.
   Widget _buildImagePlaceholder(IconData icon) {
     return Container(
       width: double.infinity,
@@ -152,31 +141,28 @@ class PostCard extends StatelessWidget {
     );
   }
 
-  /// Membangun bagian info poster.
   Widget _buildPosterInfo() {
     return Row(
       children: [
         ClipRRect(
-          borderRadius: BorderRadius.circular(100), // Bentuk lingkaran sempurna
+          borderRadius: BorderRadius.circular(100),
           child: poster.photoFile != null &&
-                  File(poster.photoFile!.path)
-                      .existsSync() // Cek keberadaan file
+                  File(poster.photoFile!.path).existsSync()
               ? Image.file(
-                  File(poster.photoFile!
-                      .path), // Gunakan poster.photoUrl (string path)
+                  File(poster.photoFile!.path),
                   width: 42,
                   height: 42,
                   fit: BoxFit.cover,
                   errorBuilder: (context, error, stackTrace) =>
-                      _buildProfilePlaceholder(), // Placeholder jika gambar rusak
+                      _buildProfilePlaceholder(),
                 )
-              : _buildProfilePlaceholder(), // Placeholder jika tidak ada gambar
+              : _buildProfilePlaceholder(),
         ),
         const SizedBox(width: 12),
         Expanded(
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start, // Align ke kiri
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 poster.username,
@@ -184,15 +170,14 @@ class PostCard extends StatelessWidget {
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
                 ),
-                maxLines: 1, // Pastikan username tidak terlalu panjang
+                maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
               Text(
-                _formatPostDate(
-                    post.createdAt), // Gunakan fungsi format tanggal
+                _formatPostDate(post.createdAt),
                 style: const TextStyle(
                   fontSize: 10,
-                  color: Colors.grey, // Tambah warna abu-abu
+                  color: Colors.grey,
                 ),
               ),
             ],
@@ -202,7 +187,6 @@ class PostCard extends StatelessWidget {
     );
   }
 
-  /// Membangun placeholder gambar profil.
   Widget _buildProfilePlaceholder() {
     return Container(
       width: 42,
@@ -212,21 +196,19 @@ class PostCard extends StatelessWidget {
     );
   }
 
-  /// Membangun bagian judul postingan.
   Widget _buildPostTitle() {
     return Text(
       post.postTitle,
       style: const TextStyle(
-        fontSize: 18, // Ukuran sedikit lebih besar
+        fontSize: 18,
         fontWeight: FontWeight.w700,
-        color: Colors.black87, // Warna teks lebih gelap
+        color: Colors.black87,
       ),
-      maxLines: 2, // Batasi jumlah baris
+      maxLines: 2,
       overflow: TextOverflow.ellipsis,
     );
   }
 
-  /// Membangun bagian info lokasi.
   Widget _buildLocationInfo() {
     return GestureDetector(
       onTap: onLocationTap,
@@ -235,7 +217,7 @@ class PostCard extends StatelessWidget {
           const Icon(
             Icons.pin_drop_rounded,
             size: 18,
-            color: Colors.blue, // Warna ikon lokasi yang lebih menonjol
+            color: Colors.blue,
           ),
           const SizedBox(width: 8),
           Expanded(
@@ -244,9 +226,9 @@ class PostCard extends StatelessWidget {
               style: const TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w500,
-                color: Colors.blue, // Warna teks lokasi yang sama
+                color: Colors.blue,
               ),
-              maxLines: 1, // Batasi 1 baris
+              maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
           ),
@@ -255,24 +237,22 @@ class PostCard extends StatelessWidget {
     );
   }
 
-  /// Membangun bagian deskripsi postingan.
   Widget _buildPostDescription() {
     return Text(
       post.postDesc,
       maxLines: 4,
       overflow: TextOverflow.ellipsis,
       style: const TextStyle(
-        fontSize: 13, // Ukuran sedikit lebih besar
-        color: Colors.black54, // Warna teks sedikit lebih terang
-        height: 1.4, // Jarak antar baris
+        fontSize: 13,
+        color: Colors.black54,
+        height: 1.4,
       ),
     );
   }
 
-  /// Membangun baris tombol aksi (like, comment, save).
   Widget _buildActionButtons() {
     return Padding(
-      padding: const EdgeInsets.only(top: 8.0), // Padding di atas divider
+      padding: const EdgeInsets.only(top: 8.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -286,18 +266,15 @@ class PostCard extends StatelessWidget {
                       ? Icons.favorite_rounded
                       : Icons.favorite_border_rounded,
                   size: 24,
-                  color: isLiked
-                      ? Colors.red
-                      : Colors.grey[700], // Warna default yang lebih gelap
+                  color: isLiked ? Colors.red : Colors.grey[700],
                 ),
-                tooltip:
-                    isLiked ? 'Batalkan Suka' : 'Suka Postingan Ini', // Tooltip
+                tooltip: isLiked ? 'Batalkan Suka' : 'Suka Postingan Ini',
               ),
               const SizedBox(width: 4),
               IconButton(
                 onPressed: () {
                   Get.snackbar(
-                    'Informasi', // Menggunakan Get.snackbar untuk informasi
+                    'Informasi',
                     'Fungsi komentar belum diimplementasikan',
                     snackPosition: SnackPosition.BOTTOM,
                     backgroundColor: Colors.blueGrey,
@@ -327,12 +304,8 @@ class PostCard extends StatelessWidget {
     );
   }
 
-  /// Helper untuk memformat tanggal
   String _formatPostDate(DateTime dateTime) {
-    // Requires intl package: dependency: intl: ^0.18.1
-    // You can choose different formats
-    final formatter =
-        DateFormat('dd MMMM yyyy HH:mm'); // Example: 06 Juni 2025 06:04
-    return formatter.format(dateTime.toLocal()); // Convert to local time
+    final formatter = DateFormat('dd MMMM yyyy HH:mm');
+    return formatter.format(dateTime.toLocal());
   }
 }

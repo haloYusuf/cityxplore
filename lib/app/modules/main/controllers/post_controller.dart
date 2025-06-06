@@ -343,14 +343,12 @@ class PostController extends GetxController {
       );
       return;
     }
-
-    // Ambil nilai numerik dari priceController.text setelah diformat
+    
     final String cleanPriceText =
         priceController.text.replaceAll(RegExp(r'\D'), '');
     final double price =
         isFree.value ? 0.0 : (double.tryParse(cleanPriceText) ?? 0.0);
-
-    // Validasi batas harga maksimum
+        
     if (price > PriceInputFormatter.maxPrice) {
       showErrorMessage(
         'Harga melebihi batas maksimum yang diizinkan (${PriceInputFormatter.maxPrice.toStringAsFixed(0)}).',
