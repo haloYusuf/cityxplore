@@ -33,8 +33,9 @@ class HomeController extends GetxController {
   void onInit() {
     super.onInit();
     fetchPostsAndUsers();
-    
-    debounce(searchQuery, (_) => filterPosts(), time: const Duration(milliseconds: 300));
+
+    debounce(searchQuery, (_) => filterPosts(),
+        time: const Duration(milliseconds: 300));
     ever(posts, (_) => filterPosts());
 
     searchController.addListener(() {
@@ -73,7 +74,7 @@ class HomeController extends GetxController {
     try {
       final allPosts = await _dbHelper.getAllPosts();
       posts.assignAll(allPosts);
-      
+
       final Map<int, User> tempUsersCache = {};
       final Set<int> uniqueUserIds = allPosts.map((post) => post.uid).toSet();
       for (var uid in uniqueUserIds) {
@@ -90,9 +91,11 @@ class HomeController extends GetxController {
 
       for (var post in allPosts) {
         if (post.postId != null) {
-          futures.add(_dbHelper.isPostLikedByUser(currentUserUid, post.postId!)
+          futures.add(_dbHelper
+              .isPostLikedByUser(currentUserUid, post.postId!)
               .then((isLiked) => tempLikedPosts[post.postId!] = isLiked));
-          futures.add(_dbHelper.isPostSavedByUser(currentUserUid, post.postId!)
+          futures.add(_dbHelper
+              .isPostSavedByUser(currentUserUid, post.postId!)
               .then((isSaved) => tempSavedPosts[post.postId!] = isSaved));
         }
       }
@@ -100,7 +103,6 @@ class HomeController extends GetxController {
 
       likedPosts.assignAll(tempLikedPosts);
       savedPosts.assignAll(tempSavedPosts);
-
     } catch (e) {
       showErrorMessage(
         'Gagal memuat data postingan dan pengguna: $e',
@@ -119,8 +121,8 @@ class HomeController extends GetxController {
       filteredPosts.assignAll(
         posts.where((post) {
           return post.postTitle.toLowerCase().contains(query) ||
-                 post.postDesc.toLowerCase().contains(query) ||
-                 post.detailLoc.toLowerCase().contains(query);
+              post.postDesc.toLowerCase().contains(query) ||
+              post.detailLoc.toLowerCase().contains(query);
         }).toList(),
       );
     }
@@ -188,7 +190,7 @@ class HomeController extends GetxController {
     }
 
     final postId = post.postId!;
-    
+
     final bool currentlySaved = isPostSaved(postId);
     savedPosts[postId] = !currentlySaved;
     savedPosts.refresh();
@@ -216,12 +218,22 @@ class HomeController extends GetxController {
       'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude',
     );
 
-    if (await canLaunchUrl(googleMapsUrl)) {
-      await launchUrl(googleMapsUrl);
-    } else {
+    try {
+      if (await canLaunchUrl(googleMapsUrl)) {
+        await launchUrl(
+          googleMapsUrl,
+          mode: LaunchMode.externalApplication,
+        );
+      } else {
+        showErrorMessage(
+          'Tidak dapat membuka Google Maps. Pastikan aplikasi Google Maps terinstal atau browser dapat diakses.',
+          title: 'Error Google Maps',
+        );
+      }
+    } catch (e) {
       showErrorMessage(
-        'Tidak dapat membuka Google Maps. Pastikan aplikasi Google Maps terinstal atau browser dapat diakses.',
-        title: 'Error Google Maps',
+        'Terjadi kesalahan saat meluncurkan Google Maps: $e',
+        title: 'Error Peluncuran',
       );
     }
   }
@@ -230,7 +242,7 @@ class HomeController extends GetxController {
     isSearching.value = !isSearching.value;
     if (!isSearching.value) {
       searchController.clear();
-      searchQuery.value = ''; 
+      searchQuery.value = '';
       filterPosts();
     }
   }
