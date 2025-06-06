@@ -1,159 +1,178 @@
+import 'package:cityxplore/core/widgets/error_dialog.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart'; // Untuk DateFormat
-import 'package:flutter/material.dart'; // Untuk IconData
+import 'package:intl/intl.dart'; // Required for DateFormat
+import 'package:flutter/material.dart'; // Required for IconData
 
 import 'package:cityxplore/app/data/models/post_model.dart';
 import 'package:cityxplore/app/data/models/user_model.dart';
 import 'package:cityxplore/app/data/services/db_helper.dart';
 import 'package:cityxplore/app/modules/main/controllers/home_controller.dart';
+import 'package:cityxplore/app/data/services/api_service.dart';
 
 class DetailPostController extends GetxController {
+  // Dependencies injected using Get.find()
   final DbHelper _dbHelper = Get.find<DbHelper>();
   final HomeController _homeController = Get.find<HomeController>();
+  final ApiService _apiService = ApiService();
 
-  late Post post; // Pastikan ini diinisialisasi melalui Get.arguments
+  // Late initialization for 'post' as it's passed via Get.arguments
+  late Post post;
 
-  final Rx<User?> poster = Rx<User?>(null);
+  // Observable properties for UI updates
+  final Rx<User?> poster = Rx<User?>(null); // Details of the user who posted
+  final RxBool isLiked = false.obs; // Tracks if the current user liked the post
+  final RxBool isSaved = false.obs; // Tracks if the current user saved the post
 
-  final RxBool isLiked = false.obs;
-  final RxBool isSaved = false.obs;
+  // Time zone conversion properties
+  final RxList<String> availableTimeZoneNames = <String>[].obs;
+  final RxString selectedTimeZoneName = ''.obs;
+  final RxString formattedSelectedTimeZoneTime = ''.obs;
 
-  // Data untuk Konversi Waktu
-  final RxList<String> availableTimeZoneNames = <String>[].obs; // BARU: Inisialisasi RxList
-  final RxString selectedTimeZoneName = ''.obs; // BARU: Inisialisasi RxString
-  final RxString formattedSelectedTimeZoneTime = ''.obs; // BARU: Inisialisasi RxString
-
-  // Map internal untuk menyimpan hasil format waktu (tidak diobservasi secara langsung)
+  // Internal maps to cache formatted times and icons for time zones
   final Map<String, String> _formattedTimeByTimeZone = {};
   final Map<String, IconData> _iconByTimeZone = {};
 
+  // Currency conversion properties
+  final RxList<String> availableCurrencyNames = <String>[].obs;
+  final RxString selectedCurrencyName = ''.obs;
+  final RxDouble displayConvertedPrice = 0.0.obs;
 
-  // Data untuk Konversi Mata Uang
-  final RxList<String> availableCurrencyNames = <String>['USD', 'EUR', 'JPY'].obs; // BARU: Inisialisasi RxList
-  final RxString selectedCurrencyName = 'USD'.obs; // BARU: Inisialisasi RxString
-  final RxDouble displayConvertedPrice = 0.0.obs; // BARU: Inisialisasi RxDouble
-
-  // Map internal untuk menyimpan hasil konversi mata uang
+  // Internal map to cache converted currency values
   final Map<String, double> _convertedCurrencyValues = {};
+  final RxBool _isConvertingCurrency = false.obs; // Loading indicator for currency conversion
+  bool get isConvertingCurrency => _isConvertingCurrency.value; 
+
+  // Static constants for time zone offsets (for demonstration, not comprehensive)
+  static const Map<String, double> _timeZoneOffsets = {
+    'UTC': 0.0,
+    'America/New_York': -5.0,
+    'Europe/London': 0.0,
+    'Asia/Tokyo': 9.0,
+    'Asia/Singapore': 8.0,
+    'Australia/Sydney': 10.0,
+    'Asia/Jakarta': 7.0, // WIB timezone
+  };
 
   @override
   void onInit() {
     super.onInit();
-    // Penting: Pastikan post diinisialisasi sebelum memanggil _loadPostDetails
+    // Check if 'post' argument is provided and is of type Post
     if (Get.arguments is Post) {
       post = Get.arguments as Post;
-      _loadPostDetails();
+      _loadPostDetails(); // Load post-related details asynchronously
     } else {
-      Get.back(); // Kembali jika tidak ada post yang diterima
-      Get.snackbar('Error', 'Postingan tidak ditemukan.', snackPosition: SnackPosition.BOTTOM);
+      Get.back(); // Navigate back if no valid post is provided
+      showErrorMessage('Postingan tidak ditemukan atau data tidak valid.', title: 'Error Navigasi');
     }
   }
 
+  // Fetches and initializes all post-related data
   Future<void> _loadPostDetails() async {
-    // Ambil data user pembuat post
-    final user = await _dbHelper.getUserById(post.uid);
-    poster.value = user;
+    try {
+      // Fetch poster user data asynchronously
+      final userFuture = _dbHelper.getUserById(post.uid);
+      poster.value = await userFuture; // Await the user data
 
-    // Set status like dan save awal dari HomeController
-    if (post.postId != null) {
-      isLiked.value = _homeController.isPostLiked(post.postId!);
-      isSaved.value = _homeController.isPostSaved(post.postId!);
-    }
-
-    _prepareTimeZones(); // Ganti _convertTimeZones menjadi _prepareTimeZones
-    _prepareCurrencyConversions(); // Ganti _convertCurrency menjadi _prepareCurrencyConversions
-
-    // Set nilai default setelah data disiapkan
-    if (availableTimeZoneNames.isNotEmpty && selectedTimeZoneName.value.isEmpty) {
-      selectedTimeZoneName.value = availableTimeZoneNames.first;
-      _updateSelectedTimeZoneTime();
-    }
-    if (availableCurrencyNames.isNotEmpty && selectedCurrencyName.value.isEmpty) {
-      // Set USD sebagai default jika ada, jika tidak, pakai yang pertama
-      if (availableCurrencyNames.contains('USD')) {
-        selectedCurrencyName.value = 'USD';
-      } else {
-        selectedCurrencyName.value = availableCurrencyNames.first;
+      // Set like and save status synchronously from HomeController's cache
+      if (post.postId != null) {
+        isLiked.value = _homeController.isPostLiked(post.postId!);
+        isSaved.value = _homeController.isPostSaved(post.postId!);
       }
-      _updateSelectedCurrencyPrice();
+
+      // Prepare time zone conversions
+      _prepareTimeZones();
+      // Prepare currency conversions asynchronously (calls API)
+      await _prepareCurrencyConversions();
+
+      // Set default selected time zone if not already set and options are available
+      if (availableTimeZoneNames.isNotEmpty && selectedTimeZoneName.value.isEmpty) {
+        selectedTimeZoneName.value = availableTimeZoneNames.first;
+      }
+      _updateSelectedTimeZoneTime(); // Update displayed time based on default selection
+
+      // Set default selected currency if not already set and options are available
+      if (availableCurrencyNames.isNotEmpty && selectedCurrencyName.value.isEmpty) {
+        // Prioritize IDR as default, otherwise pick the first available
+        if (availableCurrencyNames.contains('IDR')) {
+          selectedCurrencyName.value = 'IDR';
+        } else if (availableCurrencyNames.isNotEmpty) {
+          selectedCurrencyName.value = availableCurrencyNames.first;
+        }
+      }
+      _updateSelectedCurrencyPrice(); // Update displayed price based on default selection
+    } catch (e) {
+      showErrorMessage('Gagal memuat detail postingan: $e', title: 'Error Detail Post');
     }
   }
 
-  // BARU: Metode untuk menyiapkan data zona waktu
+  // --- Time Zone Conversion Logic ---
+
+  // Populates available time zones and their formatted times
   void _prepareTimeZones() {
-    // Daftar zona waktu target dengan offset dari UTC (dalam jam)
-    // Ini adalah offset tetap, tidak memperhitungkan Daylight Saving Time (DST)
-    final Map<String, double> offsets = {
-      'UTC': 0.0,
-      'America/New_York': -5.0, // EST
-      'Europe/London': 0.0,    // GMT
-      'Asia/Tokyo': 9.0,       // JST
-      'Asia/Singapore': 8.0,   // SST
-      'Australia/Sydney': 10.0, // AEST
-      'Asia/Jakarta': 7.0,     // WIB
-    };
-
-    final baseTimeUtc = post.createdAt.toUtc(); // Jadikan waktu dasar UTC
-
     _formattedTimeByTimeZone.clear();
-    availableTimeZoneNames.clear();
+    availableTimeZoneNames.clear(); // Ensure the list is cleared for fresh data
     _iconByTimeZone.clear();
 
-    // Tambahkan zona waktu asli postingan sebagai opsi pertama (jika ada)
+    final baseTimeUtc = post.createdAt.toUtc(); // Convert post creation time to UTC
+
+    final Set<String> addedTimeZoneNames = {}; // Use a set to track unique time zone names
+
+    // Add the original post's time zone as the first option
     if (post.timeZone != null && post.timeZone!.isNotEmpty) {
-      double originalOffsetHours = _getOffsetHoursForTimeZoneName(post.timeZone!);
+      final originalOffsetHours = _getOffsetHoursForTimeZoneName(post.timeZone!);
       final originalTime = baseTimeUtc.add(Duration(hours: originalOffsetHours.toInt()));
       final formattedOriginalTime = DateFormat('dd/MM/yyyy HH:mm:ss').format(originalTime);
 
-      _formattedTimeByTimeZone['${post.timeZone!} (Original)'] = formattedOriginalTime;
-      _iconByTimeZone['${post.timeZone!} (Original)'] = Icons.access_time;
-      availableTimeZoneNames.add('${post.timeZone!} (Original)');
+      final originalTzOption = '${post.timeZone!} (Original)';
+      _formattedTimeByTimeZone[originalTzOption] = formattedOriginalTime;
+      _iconByTimeZone[originalTzOption] = Icons.access_time;
+      availableTimeZoneNames.add(originalTzOption);
+      addedTimeZoneNames.add(originalTzOption); // Add to set
     }
 
-    // Konversi ke zona waktu target lainnya
-    for (String tzName in offsets.keys) {
-      double offsetHours = offsets[tzName]!;
+    // Convert and add other predefined time zones
+    for (final entry in _timeZoneOffsets.entries) {
+      final String tzName = entry.key;
+      final double offsetHours = entry.value;
 
-      // Hindari duplikasi jika zona waktu target sama dengan zona waktu asli postingan
-      if (post.timeZone != null && tzName == post.timeZone) {
-         continue;
+      // Skip if this timezone is the same as the original post's timezone (unless it's UTC)
+      if (addedTimeZoneNames.contains(tzName) || (post.timeZone != null && tzName == post.timeZone && tzName != "UTC")) {
+        continue;
       }
 
       try {
         final convertedTime = baseTimeUtc.add(Duration(hours: offsetHours.toInt()));
-        final formattedTime = DateFormat('dd/MM/yyyy HH:mm:ss').add_jm().format(convertedTime);
+        final formattedTime = DateFormat('dd/MM/yyyy HH:mm:ss').format(convertedTime);
 
         _formattedTimeByTimeZone[tzName] = formattedTime;
         _iconByTimeZone[tzName] = _getIconForTimeZone(tzName);
         availableTimeZoneNames.add(tzName);
+        addedTimeZoneNames.add(tzName); // Add to set
       } catch (e) {
-        print('Error converting to $tzName: $e');
+        print('Error converting time to $tzName: $e'); // Using print as per original code's style
         _formattedTimeByTimeZone[tzName] = 'Error';
         _iconByTimeZone[tzName] = Icons.error;
         availableTimeZoneNames.add(tzName);
+        addedTimeZoneNames.add(tzName); // Add to set
       }
+    }
+    // If no initial selection, set it to the first available time zone
+    if (selectedTimeZoneName.value.isEmpty && availableTimeZoneNames.isNotEmpty) {
+        selectedTimeZoneName.value = availableTimeZoneNames.first;
     }
   }
 
-  // Mendapatkan offset jam (bulat) berdasarkan nama zona waktu (sederhana)
-  // Ini hanya untuk demo, tidak akurat untuk semua zona waktu/DST.
+  // Helper to get offset hours for a given time zone name from static map
   double _getOffsetHoursForTimeZoneName(String tzName) {
-    if (tzName.contains('New_York')) return -5.0;
-    if (tzName.contains('London')) return 0.0;
-    if (tzName.contains('Tokyo')) return 9.0;
-    if (tzName.contains('Singapore')) return 8.0;
-    if (tzName.contains('Sydney')) return 10.0;
-    if (tzName.contains('Jakarta')) return 7.0;
-    if (tzName.contains('UTC')) return 0.0;
-    return 0.0; // Default atau jika tidak dikenal
+    return _timeZoneOffsets[tzName] ?? 0.0;
   }
 
-  // Mengupdate waktu yang ditampilkan berdasarkan selectedTimeZoneName
+  // Updates the observable formatted time string based on selectedTimeZoneName
   void _updateSelectedTimeZoneTime() {
     formattedSelectedTimeZoneTime.value = _formattedTimeByTimeZone[selectedTimeZoneName.value] ?? 'Waktu tidak tersedia';
   }
 
-  // Mengubah pilihan zona waktu dari dropdown
+  // Callback for when the time zone dropdown selection changes
   void changeTimeZone(String? newTzName) {
     if (newTzName != null && availableTimeZoneNames.contains(newTzName)) {
       selectedTimeZoneName.value = newTzName;
@@ -161,10 +180,12 @@ class DetailPostController extends GetxController {
     }
   }
 
+  // Returns the appropriate icon for the currently selected time zone
   IconData getIconForSelectedTimeZone() {
     return _iconByTimeZone[selectedTimeZoneName.value] ?? Icons.error;
   }
 
+  // Helper to get an icon based on time zone name
   IconData _getIconForTimeZone(String tzName) {
     if (tzName.contains('Asia')) return Icons.travel_explore;
     if (tzName.contains('Europe')) return Icons.location_city;
@@ -174,50 +195,107 @@ class DetailPostController extends GetxController {
     return Icons.access_time;
   }
 
-  // BARU: Metode untuk menyiapkan data konversi mata uang
-  void _prepareCurrencyConversions() {
+  // --- Currency Conversion Logic ---
+
+  // Fetches exchange rates from API and populates converted values
+  Future<void> _prepareCurrencyConversions() async {
+    _isConvertingCurrency.value = true; // Set loading state
+    _convertedCurrencyValues.clear();
+    availableCurrencyNames.clear(); // Ensure list is clear
+
     final double idrPrice = post.postPrice;
 
-    // Kurs konversi dummy (dalam aplikasi nyata, ini dari API eksternal)
-    const double usdToIdrRate = 16000.0;
-    const double eurToIdrRate = 17500.0;
-    const double jpyToIdrRate = 100.0;
+    final Set<String> addedCurrencyNames = {}; // Use a set to track unique currency names
 
-    _convertedCurrencyValues.clear();
-    availableCurrencyNames.clear(); // Bersihkan daftar untuk dropdown
-
+    // Always add IDR as a base option
     _convertedCurrencyValues['IDR'] = idrPrice;
-    _convertedCurrencyValues['USD'] = idrPrice / usdToIdrRate;
-    _convertedCurrencyValues['EUR'] = idrPrice / eurToIdrRate;
-    _convertedCurrencyValues['JPY'] = idrPrice / jpyToIdrRate;
+    availableCurrencyNames.add('IDR');
+    addedCurrencyNames.add('IDR');
 
-    // Isi daftar nama mata uang untuk dropdown
-    availableCurrencyNames.assignAll(_convertedCurrencyValues.keys.toList());
-    
-    // Pastikan IDR selalu di awal jika ada
-    if (availableCurrencyNames.contains('IDR')) {
-      availableCurrencyNames.remove('IDR');
-      availableCurrencyNames.insert(0, 'IDR');
+    try {
+      // Get exchange rates from API with USD as base currency
+      final Map<String, double>? apiRates = await _apiService.getExchangeRates(baseCurrency: 'USD');
+
+      // If API rates are successfully retrieved and contain IDR
+      if (apiRates != null && apiRates.containsKey('IDR')) {
+        final double idrToUsdRate = apiRates['IDR']!; // 1 USD = X IDR
+        final double priceInUsd = idrPrice / idrToUsdRate; // Convert original IDR price to USD
+
+        // Add USD, EUR, JPY by converting from the USD equivalent price
+        if (!addedCurrencyNames.contains('USD')) {
+          _convertedCurrencyValues['USD'] = priceInUsd;
+          availableCurrencyNames.add('USD');
+          addedCurrencyNames.add('USD');
+        }
+        if (apiRates.containsKey('EUR') && !addedCurrencyNames.contains('EUR')) {
+          _convertedCurrencyValues['EUR'] = priceInUsd * apiRates['EUR']!;
+          availableCurrencyNames.add('EUR');
+          addedCurrencyNames.add('EUR');
+        }
+        if (apiRates.containsKey('JPY') && !addedCurrencyNames.contains('JPY')) {
+          _convertedCurrencyValues['JPY'] = priceInUsd * apiRates['JPY']!;
+          availableCurrencyNames.add('JPY');
+          addedCurrencyNames.add('JPY');
+        }
+
+        // Sort available currency names, prioritizing IDR and USD
+        availableCurrencyNames.sort((a, b) {
+          if (a == 'IDR') return -1;
+          if (b == 'IDR') return 1;
+          if (a == 'USD') return -1;
+          if (b == 'USD') return 1;
+          return a.compareTo(b);
+        });
+      } else {
+        // Fallback if API fails or IDR rate is not found
+        showErrorMessage('Gagal mendapatkan kurs mata uang terbaru. Menggunakan nilai default.', title: 'Error Kurs');
+        _addFallbackCurrencies(idrPrice, addedCurrencyNames);
+      }
+    } catch (e) {
+      // Fallback on network errors
+      showErrorMessage('Terjadi kesalahan saat mengambil kurs mata uang: $e', title: 'Error Koneksi Kurs');
+      _addFallbackCurrencies(idrPrice, addedCurrencyNames);
+    } finally {
+      _isConvertingCurrency.value = false; // Reset loading state
     }
 
-    // Set nilai default setelah data disiapkan
-    if (availableCurrencyNames.isNotEmpty && selectedCurrencyName.value.isEmpty) {
-      // Set USD sebagai default jika ada, jika tidak, pakai yang pertama
-      if (availableCurrencyNames.contains('USD')) {
-        selectedCurrencyName.value = 'USD';
-      } else {
-        selectedCurrencyName.value = availableCurrencyNames.first;
-      }
-      _updateSelectedCurrencyPrice(); // Update harga yang ditampilkan
+    // Set selectedCurrencyName to the first available currency if not already set
+    if (selectedCurrencyName.value.isEmpty && availableCurrencyNames.isNotEmpty) {
+      selectedCurrencyName.value = availableCurrencyNames.first;
     }
   }
 
-  // Mengupdate harga yang ditampilkan berdasarkan selectedCurrencyName
+  // Helper to add fallback currency values and names
+  void _addFallbackCurrencies(double idrPrice, Set<String> addedCurrencyNames) {
+    if (!addedCurrencyNames.contains('USD')) {
+      _convertedCurrencyValues['USD'] = idrPrice / 16000.0;
+      availableCurrencyNames.add('USD');
+      addedCurrencyNames.add('USD');
+    }
+    if (!addedCurrencyNames.contains('EUR')) {
+      _convertedCurrencyValues['EUR'] = idrPrice / 17500.0;
+      availableCurrencyNames.add('EUR');
+      addedCurrencyNames.add('EUR');
+    }
+    if (!addedCurrencyNames.contains('JPY')) {
+      _convertedCurrencyValues['JPY'] = idrPrice / 100.0;
+      availableCurrencyNames.add('JPY');
+      addedCurrencyNames.add('JPY');
+    }
+    availableCurrencyNames.sort((a, b) {
+      if (a == 'IDR') return -1;
+      if (b == 'IDR') return 1;
+      return a.compareTo(b);
+    });
+  }
+
+
+  // Updates the observable displayConvertedPrice based on selectedCurrencyName
   void _updateSelectedCurrencyPrice() {
     displayConvertedPrice.value = _convertedCurrencyValues[selectedCurrencyName.value] ?? 0.0;
   }
 
-  // Mengubah pilihan mata uang dari dropdown
+  // Callback for when the currency dropdown selection changes
   void changeCurrency(String? newCurrencyName) {
     if (newCurrencyName != null && availableCurrencyNames.contains(newCurrencyName)) {
       selectedCurrencyName.value = newCurrencyName;
@@ -225,6 +303,7 @@ class DetailPostController extends GetxController {
     }
   }
 
+  // Returns the appropriate currency symbol for a given currency code
   String getCurrencySymbol(String currencyCode) {
     switch (currencyCode) {
       case 'IDR': return 'Rp';
@@ -235,16 +314,21 @@ class DetailPostController extends GetxController {
     }
   }
 
+  // --- Action Toggles (Like, Save) ---
+
+  // Toggles the like status of the post
   void toggleLike() {
-    _homeController.toggleLike(post);
-    isLiked.value = !isLiked.value;
+    isLiked.value = !isLiked.value; // Optimistic update
+    _homeController.toggleLike(post); // Delegate to HomeController for DB operation
   }
 
+  // Toggles the save status of the post
   void toggleSave() {
-    _homeController.toggleSave(post);
-    isSaved.value = !isSaved.value;
+    isSaved.value = !isSaved.value; // Optimistic update
+    _homeController.toggleSave(post); // Delegate to HomeController for DB operation
   }
 
+  // Launches Google Maps for the post's location
   void launchLocationOnMap() {
     _homeController.launchGoogleMaps(post.latitude, post.longitude);
   }

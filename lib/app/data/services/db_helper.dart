@@ -153,6 +153,20 @@ class DbHelper {
     return null;
   }
 
+  Future<int> updateUser(User user) async {
+    Database db = await database;
+    if (user.uid == null) {
+      throw Exception("User ID is required for update.");
+    }
+    return await db.update(
+      _userTable,
+      user.toMap(),
+      where: 'uid = ?',
+      whereArgs: [user.uid],
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
   // --- POST OPERATIONS ---
 
   Future<int> insertPost(Post post) async {

@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:camera/camera.dart';
 import 'package:cityxplore/app/data/services/api_service.dart';
+import 'package:cityxplore/core/utils/price_input_formatter.dart';
+import 'package:cityxplore/core/widgets/error_dialog.dart';
 import 'package:cityxplore/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -19,6 +21,7 @@ class PostController extends GetxController {
   final DbHelper _dbHelper = Get.find<DbHelper>();
   final ApiService _apiService = ApiService();
 
+  // Observable properties
   final Rx<CameraController?> _cameraController = Rx<CameraController?>(null);
   CameraController? get cameraController => _cameraController.value;
 
@@ -28,29 +31,35 @@ class PostController extends GetxController {
   final Rx<XFile?> _capturedImageFile = Rx<XFile?>(null);
   XFile? get capturedImageFile => _capturedImageFile.value;
 
-  var currentLocation = Rx<LatLng?>(null);
+  final Rx<LatLng?> currentLocation = Rx<LatLng?>(null);
   String _curLat = '';
   String _curLong = '';
 
   List<CameraDescription> _cameras = [];
 
+  // Text editing controllers
   final TextEditingController titleController = TextEditingController();
   final TextEditingController priceController = TextEditingController();
   final TextEditingController descController = TextEditingController();
+
   final RxBool isFree = false.obs;
 
   final RxBool isLoading = false.obs;
+
+  Timer? _locationTimer;
 
   @override
   void onInit() {
     super.onInit();
     _initializeCamera();
     _initializeLocTracking();
-    ever(isFree, (bool value) {
-      if (value) {
-        priceController.text = '0';
-      }
-    });
+    // Hapus ever listener ini karena formatter akan menangani tampilan '0'
+    // saat isFree berubah.
+    // ever(isFree, (bool value) {
+    //   if (value) {
+    //     priceController.text = '0';
+    //   }
+    // });
   }
 
   @override
@@ -59,6 +68,7 @@ class PostController extends GetxController {
     titleController.dispose();
     priceController.dispose();
     descController.dispose();
+    _locationTimer?.cancel();
     super.onClose();
   }
 
@@ -67,12 +77,9 @@ class PostController extends GetxController {
       _cameras = await availableCameras();
 
       if (_cameras.isEmpty) {
-        Get.snackbar(
-          'Error',
+        showErrorMessage(
           'Tidak ada kamera yang ditemukan di perangkat ini.',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red,
-          colorText: Colors.white,
+          title: 'Error Kamera',
         );
         _isCameraInit.value = false;
         return;
@@ -95,12 +102,15 @@ class PostController extends GetxController {
       update();
     } on CameraException catch (e) {
       _isCameraInit.value = false;
-      Get.snackbar(
-        'Error Kamera',
+      showErrorMessage(
         'Gagal inisialisasi kamera: ${e.description}',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
+        title: 'Error Kamera',
+      );
+    } catch (e) {
+      _isCameraInit.value = false;
+      showErrorMessage(
+        'Terjadi kesalahan tak terduga saat inisialisasi kamera: $e',
+        title: 'Error Kamera',
       );
     }
   }
@@ -110,10 +120,19 @@ class PostController extends GetxController {
     if (permission == LocationPermission.denied ||
         permission == LocationPermission.deniedForever) {
       permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied ||
+          permission == LocationPermission.deniedForever) {
+        showErrorMessage(
+          'Aplikasi membutuhkan izin lokasi untuk berfungsi dengan baik.',
+          title: 'Izin Lokasi Ditolak',
+        );
+        return;
+      }
     }
 
-    Timer.periodic(
-      Duration(seconds: 1),
+    _locationTimer?.cancel();
+    _locationTimer = Timer.periodic(
+      const Duration(seconds: 1),
       (t) async {
         try {
           Position position = await Geolocator.getCurrentPosition(
@@ -123,33 +142,20 @@ class PostController extends GetxController {
             position.latitude,
             position.longitude,
           );
-          if (_curLat.isEmpty && _curLong.isEmpty) {
+          if ((_curLat != position.latitude.toStringAsFixed(6) ||
+              _curLong != position.longitude.toStringAsFixed(6))) {
             _setCurrentValue(
               lat: position.latitude.toString(),
               long: position.longitude.toString(),
             );
-          } else {
-            if (_curLat != position.latitude.toString() ||
-                _curLong != position.longitude.toString()) {
-              _setCurrentValue(
-                lat: position.latitude.toString(),
-                long: position.longitude.toString(),
-              );
-            }
           }
         } catch (e) {
           _setCurrentEmpty();
-          Get.snackbar(
-            'Error!',
-            e.toString(),
-            snackPosition: SnackPosition.BOTTOM,
-            backgroundColor: Colors.red,
-            colorText: Colors.white,
-            icon: Icon(
-              Icons.error,
-              color: Colors.white,
-            ),
+          showErrorMessage(
+            'Gagal mendapatkan lokasi saat ini: $e',
+            title: 'Error Lokasi',
           );
+          _locationTimer?.cancel();
         }
       },
     );
@@ -161,23 +167,22 @@ class PostController extends GetxController {
   }) {
     _curLat = lat;
     _curLong = long;
+    update();
   }
 
   void _setCurrentEmpty() {
     _curLat = '';
     _curLong = '';
+    update();
   }
 
   Future<void> takePhoto() async {
     if (!isCameraInit ||
         cameraController == null ||
         cameraController!.value.isTakingPicture) {
-      Get.snackbar(
-        'Perhatian',
+      showErrorMessage(
         'Kamera belum siap atau sedang sibuk.',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.orange,
-        colorText: Colors.white,
+        title: 'Perhatian',
       );
       return;
     }
@@ -193,18 +198,21 @@ class PostController extends GetxController {
         colorText: Colors.white,
       );
     } on CameraException catch (e) {
-      Get.snackbar(
-        'Error',
+      showErrorMessage(
         'Gagal mengambil foto: ${e.description}',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
+        title: 'Error',
+      );
+    } catch (e) {
+      showErrorMessage(
+        'Terjadi kesalahan tak terduga saat mengambil foto: $e',
+        title: 'Error',
       );
     }
   }
 
   void resetImage() {
     _capturedImageFile.value = null;
+    update();
   }
 
   Future<void> switchCamera() async {
@@ -219,10 +227,9 @@ class PostController extends GetxController {
     final CameraDescription currentCamera =
         _cameraController.value!.description;
 
-    CameraDescription newCamera = _cameras.firstWhere(
-      (camera) => camera.lensDirection != currentCamera.lensDirection,
-      orElse: () => _cameras[0],
-    );
+    final int currentIndex = _cameras.indexOf(currentCamera);
+    final int nextIndex = (currentIndex + 1) % _cameras.length;
+    CameraDescription newCamera = _cameras[nextIndex];
 
     await _cameraController.value?.dispose();
 
@@ -239,12 +246,15 @@ class PostController extends GetxController {
       update();
     } on CameraException catch (e) {
       _isCameraInit.value = false;
-      Get.snackbar(
-        'Error Kamera',
+      showErrorMessage(
         'Gagal mengganti kamera: ${e.description}',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
+        title: 'Error Kamera',
+      );
+    } catch (e) {
+      _isCameraInit.value = false;
+      showErrorMessage(
+        'Terjadi kesalahan tak terduga saat mengganti kamera: $e',
+        title: 'Error Kamera',
       );
     }
   }
@@ -253,10 +263,12 @@ class PostController extends GetxController {
     isFree.value = !isFree.value;
     if (isFree.value) {
       priceController.text = '0';
-      priceController.clearComposing();
+      priceController.selection = TextSelection.collapsed(
+          offset: priceController.text.length); // Pindahkan kursor ke akhir
     } else {
       priceController.clear();
     }
+    update();
   }
 
   Future<void> _showLocalNotification(String title, String body,
@@ -289,51 +301,60 @@ class PostController extends GetxController {
   Future<void> sharePost() async {
     if (_authService.currentUser == null ||
         _authService.currentUser!.uid == null) {
-      Get.snackbar(
-        'Error',
+      showErrorMessage(
         'Anda harus login untuk membuat postingan.',
-        snackPosition: SnackPosition.BOTTOM,
+        title: 'Autentikasi Diperlukan',
       );
       return;
     }
     if (capturedImageFile == null) {
-      Get.snackbar(
-        'Error',
+      showErrorMessage(
         'Mohon ambil atau pilih gambar untuk postingan.',
-        snackPosition: SnackPosition.BOTTOM,
+        title: 'Gambar Diperlukan',
       );
       return;
     }
-    if (titleController.text.isEmpty) {
-      Get.snackbar(
-        'Error',
+    if (titleController.text.trim().isEmpty) {
+      showErrorMessage(
         'Nama Tempat tidak boleh kosong.',
-        snackPosition: SnackPosition.BOTTOM,
+        title: 'Validasi Input',
       );
       return;
     }
-    if (priceController.text.isEmpty && !isFree.value) {
-      Get.snackbar(
-        'Error',
+    if (priceController.text.trim().isEmpty && !isFree.value) {
+      showErrorMessage(
         'Harga Masuk tidak boleh kosong jika tidak gratis.',
-        snackPosition: SnackPosition.BOTTOM,
+        title: 'Validasi Input',
       );
       return;
     }
-    if (descController.text.isEmpty) {
-      Get.snackbar(
-        'Error',
+    if (descController.text.trim().isEmpty) {
+      showErrorMessage(
         'Mohon tambahkan deskripsi postingan.',
-        snackPosition: SnackPosition.BOTTOM,
+        title: 'Validasi Input',
       );
       return;
     }
     if (currentLocation.value == null ||
         (_curLat.isEmpty || _curLong.isEmpty)) {
-      Get.snackbar(
-        'Error Lokasi',
+      showErrorMessage(
         'Tidak dapat menentukan lokasi saat ini. Pastikan GPS aktif dan izin diberikan.',
-        snackPosition: SnackPosition.BOTTOM,
+        title: 'Error Lokasi',
+      );
+      return;
+    }
+
+    // Ambil nilai numerik dari priceController.text setelah diformat
+    final String cleanPriceText =
+        priceController.text.replaceAll(RegExp(r'\D'), '');
+    final double price =
+        isFree.value ? 0.0 : (double.tryParse(cleanPriceText) ?? 0.0);
+
+    // Validasi batas harga maksimum
+    if (price > PriceInputFormatter.maxPrice) {
+      showErrorMessage(
+        'Harga melebihi batas maksimum yang diizinkan (${PriceInputFormatter.maxPrice.toStringAsFixed(0)}).',
+        title: 'Harga Tidak Valid',
       );
       return;
     }
@@ -341,35 +362,41 @@ class PostController extends GetxController {
     isLoading.value = true;
 
     try {
-      final double price =
-          isFree.value ? 0.0 : (double.tryParse(priceController.text) ?? 0.0);
-      String detailLoc = await _apiService.getDetailAddress(
+      final Future<String> detailLocFuture = _apiService.getDetailAddress(
         latitude: _curLat,
         longitude: _curLong,
       );
 
-      String timeZoneName = 'N/A';
-      DateTime postCreatedAt = DateTime.now();
-
-      final timezoneResponse = await _apiService.getTimeZone(
+      final Future<Map<String, dynamic>?> timezoneResponseFuture =
+          _apiService.getTimeZone(
         latitude: double.tryParse(_curLat) ?? 0.0,
         longitude: double.tryParse(_curLong) ?? 0.0,
       );
+
+      final List<dynamic> results = await Future.wait([
+        detailLocFuture,
+        timezoneResponseFuture,
+      ]);
+
+      final String detailLoc = results[0];
+      final Map<String, dynamic>? timezoneResponse = results[1];
+
+      String timeZoneName = 'N/A';
+      DateTime postCreatedAt = DateTime.now();
 
       if (timezoneResponse != null && timezoneResponse['time_zone'] != null) {
         timeZoneName = timezoneResponse['time_zone']['name'] ?? 'N/A';
         String dateTimeString = timezoneResponse['time_zone']['date_time'];
         try {
-          postCreatedAt = DateTime.parse(
-            dateTimeString.replaceAll(' ', 'T'),
-          );
+          postCreatedAt = DateTime.parse(dateTimeString.replaceAll(' ', 'T'));
         } catch (e) {
+          debugPrint(
+              'Failed to parse timezone date_time string: $e. Using current local time.');
           postCreatedAt = DateTime.now();
         }
       } else {
-        print(
-          'Failed to get timezone from API, using current local time and N/A timezone.',
-        );
+        debugPrint(
+            'Failed to get timezone from API, using current local time and N/A timezone.');
       }
 
       final newPost = Post(
@@ -377,9 +404,9 @@ class PostController extends GetxController {
         latitude: double.parse(_curLat),
         longitude: double.parse(_curLong),
         detailLoc: detailLoc,
-        postTitle: titleController.text,
-        postDesc: descController.text,
-        postPrice: price,
+        postTitle: titleController.text.trim(),
+        postDesc: descController.text.trim(),
+        postPrice: price, // Gunakan harga yang sudah dibersihkan dan divalidasi
         postImage: capturedImageFile!.path,
         createdAt: postCreatedAt,
         timeZone: timeZoneName,
@@ -398,18 +425,17 @@ class PostController extends GetxController {
         priceController.clear();
         descController.clear();
         isFree.value = false;
+        Get.back();
       } else {
-        Get.snackbar(
-          'Error',
-          'Gagal menyimpan postingan.',
-          snackPosition: SnackPosition.BOTTOM,
+        showErrorMessage(
+          'Gagal menyimpan postingan. Terjadi masalah dengan database.',
+          title: 'Gagal Posting',
         );
       }
     } catch (e) {
-      Get.snackbar(
-        'Error',
+      showErrorMessage(
         'Terjadi kesalahan saat membagikan postingan: $e',
-        snackPosition: SnackPosition.BOTTOM,
+        title: 'Error Posting',
       );
     } finally {
       isLoading.value = false;

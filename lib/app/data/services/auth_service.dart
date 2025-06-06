@@ -10,6 +10,7 @@ class AuthService extends GetxService {
   final DbHelper _dbHelper = Get.find<DbHelper>();
   final Rx<User?> _currentUser = Rx<User?>(null);
   User? get currentUser => _currentUser.value;
+  Rx<User?> get currentUserRx => _currentUser;
 
   final GetStorage _box = GetStorage(); // Instance GetStorage
 
@@ -29,6 +30,10 @@ class AuthService extends GetxService {
       }
     }
     return this;
+  }
+
+  void updateCurrentUser(User user) {
+    _currentUser.value = user;
   }
 
   Future<bool> registerUser({

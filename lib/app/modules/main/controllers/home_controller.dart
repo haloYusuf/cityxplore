@@ -1,4 +1,6 @@
 import 'package:cityxplore/app/routes/route_name.dart';
+import 'package:cityxplore/core/widgets/custom_toast.dart';
+import 'package:cityxplore/core/widgets/error_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cityxplore/app/data/services/auth_service.dart';
@@ -31,17 +33,18 @@ class HomeController extends GetxController {
   void onInit() {
     super.onInit();
     fetchPostsAndUsers();
-    // ever(_authService.currentUser, (_) => fetchPostsAndUsers());
+
+    // Reaksi terhadap perubahan data utama atau query pencarian
+    debounce(searchQuery, (_) => filterPosts(), time: const Duration(milliseconds: 300));
     ever(posts, (_) => filterPosts());
-    ever(searchQuery, (_) => filterPosts());
 
     searchController.addListener(() {
       searchQuery.value = searchController.text;
     });
-    
+
     _shakeDetector = ShakeDetector.autoStart(
-      onPhoneShake: (v) { 
-        Get.snackbar('Informasi', 'Memuat ulang postingan...', snackPosition: SnackPosition.TOP);
+      onPhoneShake: (v) {
+        showCustomSuccessToast('Memuat Ulang Postingan');
         refreshPosts();
       },
       shakeSlopTimeMS: 500,
@@ -50,8 +53,16 @@ class HomeController extends GetxController {
     );
   }
 
+  @override
+  void onClose() {
+    _shakeDetector?.stopListening();
+    searchController.dispose();
+    super.onClose();
+  }
+
   Future<void> fetchPostsAndUsers() async {
-    if (_authService.currentUser == null) {
+    final currentUserUid = _authService.currentUser?.uid;
+    if (currentUserUid == null) {
       posts.clear();
       usersCache.clear();
       likedPosts.clear();
@@ -63,59 +74,62 @@ class HomeController extends GetxController {
     try {
       final allPosts = await _dbHelper.getAllPosts();
       posts.assignAll(allPosts);
-
-      usersCache.clear();
-      likedPosts.clear();
-      savedPosts.clear();
-
-      for (var post in allPosts) {
-        if (!usersCache.containsKey(post.uid)) {
-          final user = await _dbHelper.getUserById(post.uid);
-          if (user != null) {
-            usersCache[post.uid] = user;
-          }
-        }
-
-        if (post.postId != null) {
-          final isLiked = await _dbHelper.isPostLikedByUser(
-              _authService.currentUser!.uid!, post.postId!);
-          likedPosts[post.postId!] = isLiked;
-          final isSaved = await _dbHelper.isPostSavedByUser(
-              _authService.currentUser!.uid!, post.postId!);
-          savedPosts[post.postId!] = isSaved;
+      
+      final Map<int, User> tempUsersCache = {};
+      final Set<int> uniqueUserIds = allPosts.map((post) => post.uid).toSet();
+      for (var uid in uniqueUserIds) {
+        final user = await _dbHelper.getUserById(uid);
+        if (user != null) {
+          tempUsersCache[uid] = user;
         }
       }
-    } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Gagal memuat data: $e',
-        snackPosition: SnackPosition.BOTTOM,
-      );
-    }
-    isLoading.value = false;
-  }
+      usersCache.assignAll(tempUsersCache);
 
-  @override
-  void onClose() {
-    _shakeDetector?.stopListening();
-    searchController.dispose();
-    super.onClose();
+      final Map<int, bool> tempLikedPosts = {};
+      final Map<int, bool> tempSavedPosts = {};
+      final List<Future<void>> futures = [];
+
+      for (var post in allPosts) {
+        if (post.postId != null) {
+          futures.add(_dbHelper.isPostLikedByUser(currentUserUid, post.postId!)
+              .then((isLiked) => tempLikedPosts[post.postId!] = isLiked));
+          futures.add(_dbHelper.isPostSavedByUser(currentUserUid, post.postId!)
+              .then((isSaved) => tempSavedPosts[post.postId!] = isSaved));
+        }
+      }
+      await Future.wait(futures);
+
+      likedPosts.assignAll(tempLikedPosts);
+      savedPosts.assignAll(tempSavedPosts);
+
+    } catch (e) {
+      showErrorMessage(
+        'Gagal memuat data postingan dan pengguna: $e',
+        title: 'Error Data',
+      );
+    } finally {
+      isLoading.value = false;
+    }
   }
 
   void filterPosts() {
-    if (searchQuery.value.isEmpty) {
+    final query = searchQuery.value.toLowerCase().trim();
+    if (query.isEmpty) {
       filteredPosts.assignAll(posts);
     } else {
-      final query = searchQuery.value.toLowerCase();
       filteredPosts.assignAll(
-        posts
-            .where((post) => post.postTitle.toLowerCase().contains(query))
-            .toList(),
+        posts.where((post) {
+          return post.postTitle.toLowerCase().contains(query) ||
+                 post.postDesc.toLowerCase().contains(query) ||
+                 post.detailLoc.toLowerCase().contains(query);
+        }).toList(),
       );
     }
   }
 
   Future<void> refreshPosts() async {
+    // Reset status loading
+    isLoading.value = true;
     await fetchPostsAndUsers();
   }
 
@@ -132,71 +146,85 @@ class HomeController extends GetxController {
   }
 
   Future<void> toggleLike(Post post) async {
-    if (_authService.currentUser == null || post.postId == null) {
-      Get.snackbar('Perhatian', 'Anda harus login untuk menyukai postingan.',
-          snackPosition: SnackPosition.BOTTOM);
+    final currentUserUid = _authService.currentUser?.uid;
+    if (currentUserUid == null || post.postId == null) {
+      showErrorMessage(
+        'Anda harus login untuk menyukai postingan.',
+        title: 'Autentikasi Diperlukan',
+      );
       return;
     }
 
-    final currentUid = _authService.currentUser!.uid!;
     final postId = post.postId!;
 
-    if (isPostLiked(postId)) {
-      await _dbHelper.removeLike(currentUid, postId);
-      likedPosts[postId] = false;
-    } else {
-      await _dbHelper.addLike(
-        Like(uid: currentUid, postId: postId),
-      );
-      likedPosts[postId] = true;
+    final bool currentlyLiked = isPostLiked(postId);
+    likedPosts[postId] = !currentlyLiked;
+    likedPosts.refresh();
 
+    try {
+      if (currentlyLiked) {
+        await _dbHelper.removeLike(currentUserUid, postId);
+      } else {
+        await _dbHelper.addLike(
+          Like(uid: currentUserUid, postId: postId),
+        );
+      }
+    } catch (e) {
+      // Revert UI if DB operation fails
+      likedPosts[postId] = currentlyLiked;
       likedPosts.refresh();
+      showErrorMessage(
+        'Gagal mengubah status suka: $e',
+        title: 'Error Suka',
+      );
     }
   }
 
   Future<void> toggleSave(Post post) async {
-    if (_authService.currentUser == null || post.postId == null) {
-      Get.snackbar(
-        'Perhatian',
+    final currentUserUid = _authService.currentUser?.uid;
+    if (currentUserUid == null || post.postId == null) {
+      showErrorMessage(
         'Anda harus login untuk menyimpan postingan.',
-        snackPosition: SnackPosition.BOTTOM,
+        title: 'Autentikasi Diperlukan',
       );
       return;
     }
 
-    final currentUid = _authService.currentUser!.uid!;
     final postId = post.postId!;
-
-    if (isPostSaved(postId)) {
-      await _dbHelper.removeSaved(currentUid, postId);
-      savedPosts[postId] = false;
-    } else {
-      await _dbHelper.addSaved(
-        Saved(
-          uid: currentUid,
-          postId: postId,
-        ),
-      );
-      savedPosts[postId] = true;
-    }
-
+    
+    final bool currentlySaved = isPostSaved(postId);
+    savedPosts[postId] = !currentlySaved;
     savedPosts.refresh();
+
+    try {
+      if (currentlySaved) {
+        await _dbHelper.removeSaved(currentUserUid, postId);
+      } else {
+        await _dbHelper.addSaved(
+          Saved(uid: currentUserUid, postId: postId),
+        );
+      }
+    } catch (e) {
+      savedPosts[postId] = currentlySaved;
+      savedPosts.refresh();
+      showErrorMessage(
+        'Gagal mengubah status simpan: $e',
+        title: 'Error Simpan',
+      );
+    }
   }
 
   Future<void> launchGoogleMaps(double latitude, double longitude) async {
     final Uri googleMapsUrl = Uri.parse(
-      'https://maps.google.com/?q=$latitude,$longitude',
+      'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude',
     );
 
     if (await canLaunchUrl(googleMapsUrl)) {
       await launchUrl(googleMapsUrl);
     } else {
-      Get.snackbar(
-        'Error',
+      showErrorMessage(
         'Tidak dapat membuka Google Maps. Pastikan aplikasi Google Maps terinstal atau browser dapat diakses.',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
+        title: 'Error Google Maps',
       );
     }
   }
@@ -205,13 +233,15 @@ class HomeController extends GetxController {
     isSearching.value = !isSearching.value;
     if (!isSearching.value) {
       searchController.clear();
-      searchQuery.value = '';
+      searchQuery.value = ''; 
+      filterPosts();
     }
   }
 
   void clearSearch() {
     searchController.clear();
     searchQuery.value = '';
+    filterPosts();
   }
 
   void goToPostDetail(Post post) {
