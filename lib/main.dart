@@ -2,6 +2,7 @@ import 'package:cityxplore/app/data/models/post_model.dart';
 import 'package:cityxplore/app/data/services/auth_service.dart';
 import 'package:cityxplore/app/routes/route_name.dart';
 import 'package:cityxplore/app/routes/route_page.dart';
+import 'package:cityxplore/core/widgets/error_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -41,7 +42,32 @@ void main() async {
     initializationSettings,
     onDidReceiveNotificationResponse: onDidReceiveNotificationResponse,
   );
+
+  await _requestNotificationPermissions();
   runApp(MainApp());
+}
+
+Future<void> _requestNotificationPermissions() async {
+  bool? granted = await flutterLocalNotificationsPlugin
+      .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin>()
+      ?.requestNotificationsPermission();
+
+  await flutterLocalNotificationsPlugin
+      .resolvePlatformSpecificImplementation<
+          IOSFlutterLocalNotificationsPlugin>()
+      ?.requestPermissions(
+        alert: true,
+        badge: true,
+        sound: true,
+      );
+
+  if (granted == false) {
+    showErrorMessage(
+      'Agar aplikasi berfungsi optimal, mohon aktifkan izin notifikasi di pengaturan perangkat Anda.',
+      title: 'Izin Notifikasi Diperlukan',
+    );
+  }
 }
 
 void onDidReceiveLocalNotification(
