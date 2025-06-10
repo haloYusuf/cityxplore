@@ -96,8 +96,10 @@ class ProfileController extends GetxController
       final userPosts = await _dbHelper.getPostsByUserId(currentUserUid);
       posts.assignAll(userPosts);
     } catch (e) {
-      showErrorMessage('Gagal memuat postingan: $e',
-          title: 'Error Memuat Postingan');
+      showErrorMessage(
+        'Gagal memuat postingan: $e',
+        title: 'Error Memuat Postingan',
+      );
     }
   }
 
@@ -113,8 +115,10 @@ class ProfileController extends GetxController
           await _dbHelper.getSavedPostsByUserId(currentUserUid);
       savedItems.assignAll(userSavedItems);
     } catch (e) {
-      showErrorMessage('Gagal memuat item tersimpan: $e',
-          title: 'Error Item Tersimpan');
+      showErrorMessage(
+        'Gagal memuat item tersimpan: $e',
+        title: 'Error Item Tersimpan',
+      );
     }
   }
 
@@ -157,8 +161,10 @@ class ProfileController extends GetxController
           showErrorMessage('Gagal menghapus postingan.', title: 'Gagal Hapus');
         }
       } catch (e) {
-        showErrorMessage('Terjadi kesalahan saat menghapus: $e',
-            title: 'Error Hapus');
+        showErrorMessage(
+          'Terjadi kesalahan saat menghapus: $e',
+          title: 'Error Hapus',
+        );
       }
     }
   }
@@ -192,8 +198,11 @@ class ProfileController extends GetxController
                         ? FileImage(newProfilePhoto.value!)
                         : null,
                     child: newProfilePhoto.value == null
-                        ? Icon(Icons.camera_alt,
-                            size: 50, color: Colors.grey[700])
+                        ? Icon(
+                            Icons.camera_alt,
+                            size: 50,
+                            color: Colors.grey[700],
+                          )
                         : null,
                   ),
                 ),
@@ -244,8 +253,10 @@ class ProfileController extends GetxController
     if (newUsername != currentUser.username) {
       final existingUser = await _dbHelper.getUserByUsername(newUsername);
       if (existingUser != null && existingUser.uid != currentUser.uid) {
-        showErrorMessage('Username sudah digunakan oleh pengguna lain.',
-            title: 'Username Tidak Tersedia');
+        showErrorMessage(
+          'Username sudah digunakan oleh pengguna lain.',
+          title: 'Username Tidak Tersedia',
+        );
         return;
       }
     }
@@ -269,8 +280,10 @@ class ProfileController extends GetxController
           }
         }
       } catch (e) {
-        showErrorMessage('Gagal menyimpan foto profil baru: $e',
-            title: 'Error Foto Profil');
+        showErrorMessage(
+          'Gagal menyimpan foto profil baru: $e',
+          title: 'Error Foto Profil',
+        );
         return;
       }
     } else if (newProfilePhoto.value == null && currentUser.photoPath != null) {
@@ -295,18 +308,24 @@ class ProfileController extends GetxController
       final int rowsAffected = await _dbHelper.updateUser(updatedUser);
       if (rowsAffected > 0) {
         _authService.updateCurrentUser(updatedUser);
-        Get.snackbar('Sukses', 'Profil berhasil diperbarui!',
-            snackPosition: SnackPosition.BOTTOM,
-            backgroundColor: Colors.green,
-            colorText: Colors.white);
+        Get.snackbar(
+          'Sukses',
+          'Profil berhasil diperbarui!',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+        );
       } else {
         showErrorMessage(
-            'Gagal memperbarui profil. Tidak ada perubahan yang disimpan.',
-            title: 'Gagal Perbarui');
+          'Gagal memperbarui profil. Tidak ada perubahan yang disimpan.',
+          title: 'Gagal Perbarui',
+        );
       }
     } catch (e) {
-      showErrorMessage('Terjadi kesalahan saat memperbarui profil: $e',
-          title: 'Error Perbarui Profil');
+      showErrorMessage(
+        'Terjadi kesalahan saat memperbarui profil: $e',
+        title: 'Error Perbarui Profil',
+      );
     }
   }
 

@@ -28,8 +28,11 @@ class RegisterView extends GetView<RegisterController> {
                           ? FileImage(controller.photoFile.value!)
                           : null,
                       child: controller.photoFile.value == null
-                          ? Icon(Icons.camera_alt,
-                              size: 50, color: Colors.grey[700])
+                          ? Icon(
+                              Icons.camera_alt,
+                              size: 50,
+                              color: Colors.grey[700],
+                            )
                           : null,
                     ),
                   )),

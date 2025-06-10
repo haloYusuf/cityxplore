@@ -206,7 +206,7 @@ class DbHelper {
       where: 'postId = ?',
       whereArgs: [postId],
     );
-    
+
     if (maps.isNotEmpty) {
       return Post.fromMap(maps.first);
     } else {
@@ -227,8 +227,11 @@ class DbHelper {
 
   Future<int> addLike(Like like) async {
     Database db = await database;
-    return await db.insert(_likeTable, like.toMap(),
-        conflictAlgorithm: ConflictAlgorithm.replace);
+    return await db.insert(
+      _likeTable,
+      like.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
   }
 
   Future<int> removeLike(int uid, int postId) async {
@@ -263,8 +266,11 @@ class DbHelper {
 
   Future<int> addSaved(Saved saved) async {
     Database db = await database;
-    return await db.insert(_savedTable, saved.toMap(),
-        conflictAlgorithm: ConflictAlgorithm.replace);
+    return await db.insert(
+      _savedTable,
+      saved.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
   }
 
   Future<int> removeSaved(int uid, int postId) async {
@@ -288,12 +294,15 @@ class DbHelper {
 
   Future<List<Post>> getSavedPostsByUserId(int uid) async {
     Database db = await database;
-    List<Map<String, dynamic>> maps = await db.rawQuery('''
+    List<Map<String, dynamic>> maps = await db.rawQuery(
+      '''
       SELECT p.* FROM $_postTable p
       INNER JOIN $_savedTable s ON p.postId = s.postId
       WHERE s.uid = ?
       ORDER BY p.createdAt DESC
-    ''', [uid]);
+    ''',
+      [uid],
+    );
     return List.generate(maps.length, (i) {
       return Post.fromMap(maps[i]);
     });

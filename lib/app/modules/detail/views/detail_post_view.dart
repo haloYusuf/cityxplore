@@ -69,13 +69,16 @@ class DetailPostView extends GetView<DetailPostController> {
             )
           : _buildImagePlaceholder(
               icon: Icons.image,
-              size: 80), // Fallback if no image file or corrupted
+              size: 80,
+            ), // Fallback if no image file or corrupted
     );
   }
 
   /// Builds a placeholder for images when they are not available or fail to load.
-  Widget _buildImagePlaceholder(
-      {IconData icon = Icons.broken_image, double size = 50}) {
+  Widget _buildImagePlaceholder({
+    IconData icon = Icons.broken_image,
+    double size = 50,
+  }) {
     return Container(
       width: double.infinity,
       height: 250,
@@ -347,8 +350,12 @@ class DetailPostView extends GetView<DetailPostController> {
   }
 
   /// Helper method to build an info row with an icon and text.
-  Widget _buildInfoRow(IconData icon, String text,
-      {Color? color, TextDecoration? decoration}) {
+  Widget _buildInfoRow(
+    IconData icon,
+    String text, {
+    Color? color,
+    TextDecoration? decoration,
+  }) {
     return Row(
       children: [
         Icon(icon, size: 20, color: color ?? Colors.grey),

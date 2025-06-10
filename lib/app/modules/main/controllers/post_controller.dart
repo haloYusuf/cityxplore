@@ -217,10 +217,13 @@ class PostController extends GetxController {
 
   Future<void> switchCamera() async {
     if (_cameras.length < 2) {
-      Get.snackbar('Info', 'Hanya ada satu kamera yang tersedia.',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.blueGrey,
-          colorText: Colors.white);
+      Get.snackbar(
+        'Info',
+        'Hanya ada satu kamera yang tersedia.',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.blueGrey,
+        colorText: Colors.white,
+      );
       return;
     }
 
@@ -264,15 +267,19 @@ class PostController extends GetxController {
     if (isFree.value) {
       priceController.text = '0';
       priceController.selection = TextSelection.collapsed(
-          offset: priceController.text.length); // Pindahkan kursor ke akhir
+        offset: priceController.text.length,
+      ); // Pindahkan kursor ke akhir
     } else {
       priceController.clear();
     }
     update();
   }
 
-  Future<void> _showLocalNotification(String title, String body,
-      {String? payload}) async {
+  Future<void> _showLocalNotification(
+    String title,
+    String body, {
+    String? payload,
+  }) async {
     const AndroidNotificationDetails androidPlatformChannelSpecifics =
         AndroidNotificationDetails(
       'com.cityxplore.new_post_alerts',
@@ -343,12 +350,12 @@ class PostController extends GetxController {
       );
       return;
     }
-    
+
     final String cleanPriceText =
         priceController.text.replaceAll(RegExp(r'\D'), '');
     final double price =
         isFree.value ? 0.0 : (double.tryParse(cleanPriceText) ?? 0.0);
-        
+
     if (price > PriceInputFormatter.maxPrice) {
       showErrorMessage(
         'Harga melebihi batas maksimum yang diizinkan (${PriceInputFormatter.maxPrice.toStringAsFixed(0)}).',
@@ -389,12 +396,14 @@ class PostController extends GetxController {
           postCreatedAt = DateTime.parse(dateTimeString.replaceAll(' ', 'T'));
         } catch (e) {
           debugPrint(
-              'Failed to parse timezone date_time string: $e. Using current local time.');
+            'Failed to parse timezone date_time string: $e. Using current local time.',
+          );
           postCreatedAt = DateTime.now();
         }
       } else {
         debugPrint(
-            'Failed to get timezone from API, using current local time and N/A timezone.');
+          'Failed to get timezone from API, using current local time and N/A timezone.',
+        );
       }
 
       final newPost = Post(

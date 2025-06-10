@@ -122,7 +122,7 @@ class PostCard extends StatelessWidget {
                       color: Colors.white,
                       fontWeight: FontWeight.w600,
                     ),
-                  )
+                  ),
                 ],
               ),
             ),

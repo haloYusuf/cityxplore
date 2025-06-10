@@ -29,13 +29,19 @@ class RegisterController extends GetxController {
     if (usernameController.text.isEmpty ||
         emailController.text.isEmpty ||
         passwordController.text.isEmpty) {
-      Get.snackbar('Error', 'Semua kolom harus diisi.',
-          snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar(
+        'Error',
+        'Semua kolom harus diisi.',
+        snackPosition: SnackPosition.BOTTOM,
+      );
       return;
     }
     if (!GetUtils.isEmail(emailController.text)) {
-      Get.snackbar('Error', 'Format email tidak valid.',
-          snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar(
+        'Error',
+        'Format email tidak valid.',
+        snackPosition: SnackPosition.BOTTOM,
+      );
       return;
     }
 

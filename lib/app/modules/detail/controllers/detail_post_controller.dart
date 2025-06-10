@@ -53,8 +53,10 @@ class DetailPostController extends GetxController {
       _loadPostDetails();
     } else {
       Get.back();
-      showErrorMessage('Postingan tidak ditemukan atau data tidak valid.',
-          title: 'Error Navigasi');
+      showErrorMessage(
+        'Postingan tidak ditemukan atau data tidak valid.',
+        title: 'Error Navigasi',
+      );
     }
   }
 
@@ -86,8 +88,10 @@ class DetailPostController extends GetxController {
       }
       _updateSelectedCurrencyPrice();
     } catch (e) {
-      showErrorMessage('Gagal memuat detail postingan: $e',
-          title: 'Error Detail Post');
+      showErrorMessage(
+        'Gagal memuat detail postingan: $e',
+        title: 'Error Detail Post',
+      );
     }
   }
 
@@ -229,13 +233,16 @@ class DetailPostController extends GetxController {
         });
       } else {
         showErrorMessage(
-            'Gagal mendapatkan kurs mata uang terbaru. Menggunakan nilai default.',
-            title: 'Error Kurs');
+          'Gagal mendapatkan kurs mata uang terbaru. Menggunakan nilai default.',
+          title: 'Error Kurs',
+        );
         _addFallbackCurrencies(idrPrice, addedCurrencyNames);
       }
     } catch (e) {
-      showErrorMessage('Terjadi kesalahan saat mengambil kurs mata uang: $e',
-          title: 'Error Koneksi Kurs');
+      showErrorMessage(
+        'Terjadi kesalahan saat mengambil kurs mata uang: $e',
+        title: 'Error Koneksi Kurs',
+      );
       _addFallbackCurrencies(idrPrice, addedCurrencyNames);
     } finally {
       _isConvertingCurrency.value = false;

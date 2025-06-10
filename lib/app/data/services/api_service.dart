@@ -54,18 +54,22 @@ class ApiService {
         return data;
       } else {
         Get.snackbar(
-            'Error API', 'Gagal memuat zona waktu: ${response.statusCode}',
-            snackPosition: SnackPosition.BOTTOM,
-            backgroundColor: Colors.red,
-            colorText: Colors.white);
+          'Error API',
+          'Gagal memuat zona waktu: ${response.statusCode}',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+        );
         return null;
       }
     } catch (e) {
       Get.snackbar(
-          'Error Jaringan', 'Tidak dapat terhubung ke API zona waktu: $e',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red,
-          colorText: Colors.white);
+        'Error Jaringan',
+        'Tidak dapat terhubung ke API zona waktu: $e',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
       return null;
     }
   }

@@ -227,8 +227,10 @@ class PostView extends StatelessWidget {
                         backgroundColor: Colors.transparent,
                         elevation: 0,
                         onPressed: () {},
-                        child: const Icon(Icons.cameraswitch,
-                            color: Colors.transparent),
+                        child: const Icon(
+                          Icons.cameraswitch,
+                          color: Colors.transparent,
+                        ),
                       ),
                     ],
                   ),

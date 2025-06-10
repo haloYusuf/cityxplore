@@ -84,7 +84,7 @@ void showCustomSuccessToast(String message) {
   overlayEntry = OverlayEntry(
     builder: (context) => CustomToast(message: message),
   );
-  
+
   if (Get.overlayContext != null) {
     Navigator.of(Get.overlayContext!).push(
       _ToastRoute(overlayEntry),
@@ -99,14 +99,19 @@ class _ToastRoute extends PageRouteBuilder {
       : super(
           opaque: false,
           barrierColor: Colors.transparent,
-          pageBuilder: (BuildContext context, Animation<double> animation,
-              Animation<double> secondaryAnimation) {
+          pageBuilder: (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+          ) {
             return overlayEntry.builder(context);
           },
-          transitionsBuilder: (BuildContext context,
-              Animation<double> animation,
-              Animation<double> secondaryAnimation,
-              Widget child) {
+          transitionsBuilder: (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+            Widget child,
+          ) {
             return child;
           },
         );

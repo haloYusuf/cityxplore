@@ -34,8 +34,11 @@ class HomeController extends GetxController {
     super.onInit();
     fetchPostsAndUsers();
 
-    debounce(searchQuery, (_) => filterPosts(),
-        time: const Duration(milliseconds: 300));
+    debounce(
+      searchQuery,
+      (_) => filterPosts(),
+      time: const Duration(milliseconds: 300),
+    );
     ever(posts, (_) => filterPosts());
 
     searchController.addListener(() {

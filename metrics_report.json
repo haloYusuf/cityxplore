@@ -1,0 +1,3009 @@
+{
+  "formatVersion": 2,
+  "timestamp": "2025-06-10 20:44:33.000",
+  "records": [
+    {
+      "path": "lib\\app\\modules\\auth\\bindings\\login_binding.dart",
+      "fileMetrics": [
+        {
+          "metricsId": "technical-debt",
+          "value": 0.0,
+          "level": "none",
+          "comment": "This compilation unit has 0.0 swe hours of debt.",
+          "context": []
+        }
+      ],
+      "classes": {
+        "LoginBinding": {
+          "codeSpan": {
+            "start": { "offset": 115, "line": 4, "column": 1 },
+            "end": { "offset": 273, "line": 11, "column": 2 },
+            "text": "class LoginBinding extends Bindings {\r\n  @override\r\n  void dependencies() {\r\n    Get.lazyPut<LoginController>(\r\n      () => LoginController(),\r\n    );\r\n  }\r\n}"
+          },
+          "metrics": [
+            {
+              "metricsId": "number-of-methods",
+              "value": 1,
+              "unitType": "method",
+              "level": "none",
+              "comment": "This class has 1 method.",
+              "context": [
+                {
+                  "message": "method dependencies increase metric value",
+                  "codeSpan": {
+                    "start": { "offset": 169, "line": 6, "column": 3 },
+                    "end": { "offset": 270, "line": 10, "column": 4 },
+                    "text": "void dependencies() {\r\n    Get.lazyPut<LoginController>(\r\n      () => LoginController(),\r\n    );\r\n  }"
+                  }
+                }
+              ]
+            },
+            {
+              "metricsId": "weight-of-class",
+              "value": 1.0,
+              "level": "none",
+              "comment": "This class has a weight of 1.0.",
+              "context": [
+                {
+                  "message": "functional method dependencies increase metric value",
+                  "codeSpan": {
+                    "start": { "offset": 169, "line": 6, "column": 3 },
+                    "end": { "offset": 270, "line": 10, "column": 4 },
+                    "text": "void dependencies() {\r\n    Get.lazyPut<LoginController>(\r\n      () => LoginController(),\r\n    );\r\n  }"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "functions": {
+        "LoginBinding.dependencies": {
+          "codeSpan": {
+            "start": { "offset": 169, "line": 6, "column": 3 },
+            "end": { "offset": 270, "line": 10, "column": 4 },
+            "text": "void dependencies() {\r\n    Get.lazyPut<LoginController>(\r\n      () => LoginController(),\r\n    );\r\n  }"
+          },
+          "metrics": [
+            {
+              "metricsId": "cyclomatic-complexity",
+              "value": 1,
+              "level": "none",
+              "comment": "This method has a cyclomatic complexity of 1.",
+              "context": []
+            },
+            {
+              "metricsId": "halstead-volume",
+              "value": 16.253496664211536,
+              "level": "none",
+              "comment": "This method has a halstead volume of 16.253496664211536.",
+              "context": []
+            },
+            {
+              "metricsId": "lines-of-code",
+              "value": 6,
+              "unitType": "lines",
+              "level": "none",
+              "comment": "This method has 6 lines of code.",
+              "context": []
+            },
+            {
+              "metricsId": "maximum-nesting-level",
+              "value": 1,
+              "level": "none",
+              "comment": "This method has a nesting level of 1.",
+              "context": [
+                {
+                  "message": "Block function body increases depth",
+                  "codeSpan": {
+                    "start": { "offset": 189, "line": 6, "column": 23 },
+                    "end": { "offset": 270, "line": 10, "column": 4 },
+                    "text": "{\r\n    Get.lazyPut<LoginController>(\r\n      () => LoginController(),\r\n    );\r\n  }"
+                  }
+                }
+              ]
+            },
+            {
+              "metricsId": "number-of-parameters",
+              "value": 0,
+              "level": "none",
+              "comment": "This method has 0 parameters.",
+              "context": []
+            },
+            {
+              "metricsId": "source-lines-of-code",
+              "value": 3,
+              "unitType": "lines",
+              "level": "none",
+              "comment": "This method has 3 source lines of code.",
+              "context": [
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 192, "line": 7, "column": 0 },
+                    "end": { "offset": 192, "line": 7, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 227, "line": 8, "column": 0 },
+                    "end": { "offset": 227, "line": 8, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 259, "line": 9, "column": 0 },
+                    "end": { "offset": 259, "line": 9, "column": 0 },
+                    "text": ""
+                  }
+                }
+              ]
+            },
+            {
+              "metricsId": "maintainability-index",
+              "value": 81,
+              "level": "none",
+              "comment": "This method has 81 maintainability index.",
+              "context": []
+            }
+          ]
+        }
+      },
+      "issues": [],
+      "antiPatternCases": []
+    },
+    {
+      "path": "lib\\app\\modules\\auth\\bindings\\register_binding.dart",
+      "fileMetrics": [
+        {
+          "metricsId": "technical-debt",
+          "value": 0.0,
+          "level": "none",
+          "comment": "This compilation unit has 0.0 swe hours of debt.",
+          "context": []
+        }
+      ],
+      "classes": {
+        "RegisterBinding": {
+          "codeSpan": {
+            "start": { "offset": 118, "line": 4, "column": 1 },
+            "end": { "offset": 285, "line": 11, "column": 2 },
+            "text": "class RegisterBinding extends Bindings {\r\n  @override\r\n  void dependencies() {\r\n    Get.lazyPut<RegisterController>(\r\n      () => RegisterController(),\r\n    );\r\n  }\r\n}"
+          },
+          "metrics": [
+            {
+              "metricsId": "number-of-methods",
+              "value": 1,
+              "unitType": "method",
+              "level": "none",
+              "comment": "This class has 1 method.",
+              "context": [
+                {
+                  "message": "method dependencies increase metric value",
+                  "codeSpan": {
+                    "start": { "offset": 175, "line": 6, "column": 3 },
+                    "end": { "offset": 282, "line": 10, "column": 4 },
+                    "text": "void dependencies() {\r\n    Get.lazyPut<RegisterController>(\r\n      () => RegisterController(),\r\n    );\r\n  }"
+                  }
+                }
+              ]
+            },
+            {
+              "metricsId": "weight-of-class",
+              "value": 1.0,
+              "level": "none",
+              "comment": "This class has a weight of 1.0.",
+              "context": [
+                {
+                  "message": "functional method dependencies increase metric value",
+                  "codeSpan": {
+                    "start": { "offset": 175, "line": 6, "column": 3 },
+                    "end": { "offset": 282, "line": 10, "column": 4 },
+                    "text": "void dependencies() {\r\n    Get.lazyPut<RegisterController>(\r\n      () => RegisterController(),\r\n    );\r\n  }"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "functions": {
+        "RegisterBinding.dependencies": {
+          "codeSpan": {
+            "start": { "offset": 175, "line": 6, "column": 3 },
+            "end": { "offset": 282, "line": 10, "column": 4 },
+            "text": "void dependencies() {\r\n    Get.lazyPut<RegisterController>(\r\n      () => RegisterController(),\r\n    );\r\n  }"
+          },
+          "metrics": [
+            {
+              "metricsId": "cyclomatic-complexity",
+              "value": 1,
+              "level": "none",
+              "comment": "This method has a cyclomatic complexity of 1.",
+              "context": []
+            },
+            {
+              "metricsId": "halstead-volume",
+              "value": 16.253496664211536,
+              "level": "none",
+              "comment": "This method has a halstead volume of 16.253496664211536.",
+              "context": []
+            },
+            {
+              "metricsId": "lines-of-code",
+              "value": 6,
+              "unitType": "lines",
+              "level": "none",
+              "comment": "This method has 6 lines of code.",
+              "context": []
+            },
+            {
+              "metricsId": "maximum-nesting-level",
+              "value": 1,
+              "level": "none",
+              "comment": "This method has a nesting level of 1.",
+              "context": [
+                {
+                  "message": "Block function body increases depth",
+                  "codeSpan": {
+                    "start": { "offset": 195, "line": 6, "column": 23 },
+                    "end": { "offset": 282, "line": 10, "column": 4 },
+                    "text": "{\r\n    Get.lazyPut<RegisterController>(\r\n      () => RegisterController(),\r\n    );\r\n  }"
+                  }
+                }
+              ]
+            },
+            {
+              "metricsId": "number-of-parameters",
+              "value": 0,
+              "level": "none",
+              "comment": "This method has 0 parameters.",
+              "context": []
+            },
+            {
+              "metricsId": "source-lines-of-code",
+              "value": 3,
+              "unitType": "lines",
+              "level": "none",
+              "comment": "This method has 3 source lines of code.",
+              "context": [
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 198, "line": 7, "column": 0 },
+                    "end": { "offset": 198, "line": 7, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 236, "line": 8, "column": 0 },
+                    "end": { "offset": 236, "line": 8, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 271, "line": 9, "column": 0 },
+                    "end": { "offset": 271, "line": 9, "column": 0 },
+                    "text": ""
+                  }
+                }
+              ]
+            },
+            {
+              "metricsId": "maintainability-index",
+              "value": 81,
+              "level": "none",
+              "comment": "This method has 81 maintainability index.",
+              "context": []
+            }
+          ]
+        }
+      },
+      "issues": [],
+      "antiPatternCases": []
+    },
+    {
+      "path": "lib\\app\\modules\\auth\\controllers\\login_controller.dart",
+      "fileMetrics": [
+        {
+          "metricsId": "technical-debt",
+          "value": 0.0,
+          "level": "none",
+          "comment": "This compilation unit has 0.0 swe hours of debt.",
+          "context": []
+        }
+      ],
+      "classes": {
+        "LoginController": {
+          "codeSpan": {
+            "start": { "offset": 197, "line": 6, "column": 1 },
+            "end": { "offset": 1229, "line": 41, "column": 2 },
+            "text": "class LoginController extends GetxController {\r\n  final AuthService _authService = Get.find<AuthService>();\r\n\r\n  final TextEditingController usernameController = TextEditingController();\r\n  final TextEditingController passwordController = TextEditingController();\r\n  final RxBool isLoading = false.obs;\r\n\r\n  Future<void> login() async {\r\n    if (usernameController.text.isEmpty || passwordController.text.isEmpty) {\r\n      Get.snackbar('Error', 'Username dan password tidak boleh kosong.', snackPosition: SnackPosition.BOTTOM);\r\n      return;\r\n    }\r\n\r\n    isLoading.value = true;\r\n    final success = await _authService.loginUser(\r\n      username: usernameController.text,\r\n      password: passwordController.text,\r\n    );\r\n    isLoading.value = false;\r\n\r\n    if (success) {\r\n      Get.offAllNamed(RouteName.main);\r\n    }\r\n  }\r\n\r\n  void goToRegister() {\r\n    Get.toNamed(RouteName.register);\r\n  }\r\n\r\n  @override\r\n  void onClose() {\r\n    usernameController.dispose();\r\n    passwordController.dispose();\r\n    super.onClose();\r\n  }\r\n}"
+          },
+          "metrics": [
+            {
+              "metricsId": "number-of-methods",
+              "value": 3,
+              "unitType": "methods",
+              "level": "none",
+              "comment": "This class has 3 methods.",
+              "context": [
+                {
+                  "message": "method login increase metric value",
+                  "codeSpan": {
+                    "start": { "offset": 505, "line": 13, "column": 3 },
+                    "end": { "offset": 1024, "line": 29, "column": 4 },
+                    "text": "Future<void> login() async {\r\n    if (usernameController.text.isEmpty || passwordController.text.isEmpty) {\r\n      Get.snackbar('Error', 'Username dan password tidak boleh kosong.', snackPosition: SnackPosition.BOTTOM);\r\n      return;\r\n    }\r\n\r\n    isLoading.value = true;\r\n    final success = await _authService.loginUser(\r\n      username: usernameController.text,\r\n      password: passwordController.text,\r\n    );\r\n    isLoading.value = false;\r\n\r\n    if (success) {\r\n      Get.offAllNamed(RouteName.main);\r\n    }\r\n  }"
+                  }
+                },
+                {
+                  "message": "method goToRegister increase metric value",
+                  "codeSpan": {
+                    "start": { "offset": 1030, "line": 31, "column": 3 },
+                    "end": { "offset": 1094, "line": 33, "column": 4 },
+                    "text": "void goToRegister() {\r\n    Get.toNamed(RouteName.register);\r\n  }"
+                  }
+                },
+                {
+                  "message": "method onClose increase metric value",
+                  "codeSpan": {
+                    "start": { "offset": 1113, "line": 36, "column": 3 },
+                    "end": { "offset": 1226, "line": 40, "column": 4 },
+                    "text": "void onClose() {\r\n    usernameController.dispose();\r\n    passwordController.dispose();\r\n    super.onClose();\r\n  }"
+                  }
+                }
+              ]
+            },
+            {
+              "metricsId": "weight-of-class",
+              "value": 1.0,
+              "level": "none",
+              "comment": "This class has a weight of 1.0.",
+              "context": [
+                {
+                  "message": "functional method login increase metric value",
+                  "codeSpan": {
+                    "start": { "offset": 505, "line": 13, "column": 3 },
+                    "end": { "offset": 1024, "line": 29, "column": 4 },
+                    "text": "Future<void> login() async {\r\n    if (usernameController.text.isEmpty || passwordController.text.isEmpty) {\r\n      Get.snackbar('Error', 'Username dan password tidak boleh kosong.', snackPosition: SnackPosition.BOTTOM);\r\n      return;\r\n    }\r\n\r\n    isLoading.value = true;\r\n    final success = await _authService.loginUser(\r\n      username: usernameController.text,\r\n      password: passwordController.text,\r\n    );\r\n    isLoading.value = false;\r\n\r\n    if (success) {\r\n      Get.offAllNamed(RouteName.main);\r\n    }\r\n  }"
+                  }
+                },
+                {
+                  "message": "functional method goToRegister increase metric value",
+                  "codeSpan": {
+                    "start": { "offset": 1030, "line": 31, "column": 3 },
+                    "end": { "offset": 1094, "line": 33, "column": 4 },
+                    "text": "void goToRegister() {\r\n    Get.toNamed(RouteName.register);\r\n  }"
+                  }
+                },
+                {
+                  "message": "functional method onClose increase metric value",
+                  "codeSpan": {
+                    "start": { "offset": 1113, "line": 36, "column": 3 },
+                    "end": { "offset": 1226, "line": 40, "column": 4 },
+                    "text": "void onClose() {\r\n    usernameController.dispose();\r\n    passwordController.dispose();\r\n    super.onClose();\r\n  }"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "functions": {
+        "LoginController.login": {
+          "codeSpan": {
+            "start": { "offset": 505, "line": 13, "column": 3 },
+            "end": { "offset": 1024, "line": 29, "column": 4 },
+            "text": "Future<void> login() async {\r\n    if (usernameController.text.isEmpty || passwordController.text.isEmpty) {\r\n      Get.snackbar('Error', 'Username dan password tidak boleh kosong.', snackPosition: SnackPosition.BOTTOM);\r\n      return;\r\n    }\r\n\r\n    isLoading.value = true;\r\n    final success = await _authService.loginUser(\r\n      username: usernameController.text,\r\n      password: passwordController.text,\r\n    );\r\n    isLoading.value = false;\r\n\r\n    if (success) {\r\n      Get.offAllNamed(RouteName.main);\r\n    }\r\n  }"
+          },
+          "metrics": [
+            {
+              "metricsId": "cyclomatic-complexity",
+              "value": 4,
+              "level": "none",
+              "comment": "This method has a cyclomatic complexity of 4.",
+              "context": [
+                {
+                  "message": "If statement increases complexity",
+                  "codeSpan": {
+                    "start": { "offset": 539, "line": 14, "column": 5 },
+                    "end": { "offset": 746, "line": 17, "column": 6 },
+                    "text": "if (usernameController.text.isEmpty || passwordController.text.isEmpty) {\r\n      Get.snackbar('Error', 'Username dan password tidak boleh kosong.', snackPosition: SnackPosition.BOTTOM);\r\n      return;\r\n    }"
+                  }
+                },
+                {
+                  "message": "Operator || increases complexity",
+                  "codeSpan": {
+                    "start": { "offset": 575, "line": 14, "column": 41 },
+                    "end": { "offset": 577, "line": 14, "column": 43 },
+                    "text": "||"
+                  }
+                },
+                {
+                  "message": "If statement increases complexity",
+                  "codeSpan": {
+                    "start": { "offset": 958, "line": 26, "column": 5 },
+                    "end": { "offset": 1019, "line": 28, "column": 6 },
+                    "text": "if (success) {\r\n      Get.offAllNamed(RouteName.main);\r\n    }"
+                  }
+                }
+              ]
+            },
+            {
+              "metricsId": "halstead-volume",
+              "value": 151.6206750336681,
+              "level": "none",
+              "comment": "This method has a halstead volume of 151.6206750336681.",
+              "context": []
+            },
+            {
+              "metricsId": "lines-of-code",
+              "value": 17,
+              "unitType": "lines",
+              "level": "none",
+              "comment": "This method has 17 lines of code.",
+              "context": []
+            },
+            {
+              "metricsId": "maximum-nesting-level",
+              "value": 2,
+              "level": "none",
+              "comment": "This method has a nesting level of 2.",
+              "context": [
+                {
+                  "message": "Block function body increases depth",
+                  "codeSpan": {
+                    "start": { "offset": 532, "line": 13, "column": 30 },
+                    "end": { "offset": 1024, "line": 29, "column": 4 },
+                    "text": "{\r\n    if (usernameController.text.isEmpty || passwordController.text.isEmpty) {\r\n      Get.snackbar('Error', 'Username dan password tidak boleh kosong.', snackPosition: SnackPosition.BOTTOM);\r\n      return;\r\n    }\r\n\r\n    isLoading.value = true;\r\n    final success = await _authService.loginUser(\r\n      username: usernameController.text,\r\n      password: passwordController.text,\r\n    );\r\n    isLoading.value = false;\r\n\r\n    if (success) {\r\n      Get.offAllNamed(RouteName.main);\r\n    }\r\n  }"
+                  }
+                },
+                {
+                  "message": "If statement increases depth",
+                  "codeSpan": {
+                    "start": { "offset": 611, "line": 14, "column": 77 },
+                    "end": { "offset": 746, "line": 17, "column": 6 },
+                    "text": "{\r\n      Get.snackbar('Error', 'Username dan password tidak boleh kosong.', snackPosition: SnackPosition.BOTTOM);\r\n      return;\r\n    }"
+                  }
+                }
+              ]
+            },
+            {
+              "metricsId": "number-of-parameters",
+              "value": 0,
+              "level": "none",
+              "comment": "This method has 0 parameters.",
+              "context": []
+            },
+            {
+              "metricsId": "source-lines-of-code",
+              "value": 13,
+              "unitType": "lines",
+              "level": "none",
+              "comment": "This method has 13 source lines of code.",
+              "context": [
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 535, "line": 14, "column": 0 },
+                    "end": { "offset": 535, "line": 14, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 614, "line": 15, "column": 0 },
+                    "end": { "offset": 614, "line": 15, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 726, "line": 16, "column": 0 },
+                    "end": { "offset": 726, "line": 16, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 741, "line": 17, "column": 0 },
+                    "end": { "offset": 741, "line": 17, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 750, "line": 19, "column": 0 },
+                    "end": { "offset": 750, "line": 19, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 779, "line": 20, "column": 0 },
+                    "end": { "offset": 779, "line": 20, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 830, "line": 21, "column": 0 },
+                    "end": { "offset": 830, "line": 21, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 872, "line": 22, "column": 0 },
+                    "end": { "offset": 872, "line": 22, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 914, "line": 23, "column": 0 },
+                    "end": { "offset": 914, "line": 23, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 922, "line": 24, "column": 0 },
+                    "end": { "offset": 922, "line": 24, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 954, "line": 26, "column": 0 },
+                    "end": { "offset": 954, "line": 26, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 974, "line": 27, "column": 0 },
+                    "end": { "offset": 974, "line": 27, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1014, "line": 28, "column": 0 },
+                    "end": { "offset": 1014, "line": 28, "column": 0 },
+                    "text": ""
+                  }
+                }
+              ]
+            },
+            {
+              "metricsId": "maintainability-index",
+              "value": 60,
+              "level": "noted",
+              "comment": "This method has 60 maintainability index.",
+              "context": []
+            }
+          ]
+        },
+        "LoginController.goToRegister": {
+          "codeSpan": {
+            "start": { "offset": 1030, "line": 31, "column": 3 },
+            "end": { "offset": 1094, "line": 33, "column": 4 },
+            "text": "void goToRegister() {\r\n    Get.toNamed(RouteName.register);\r\n  }"
+          },
+          "metrics": [
+            {
+              "metricsId": "cyclomatic-complexity",
+              "value": 1,
+              "level": "none",
+              "comment": "This method has a cyclomatic complexity of 1.",
+              "context": []
+            },
+            {
+              "metricsId": "halstead-volume",
+              "value": 8.0,
+              "level": "none",
+              "comment": "This method has a halstead volume of 8.0.",
+              "context": []
+            },
+            {
+              "metricsId": "lines-of-code",
+              "value": 3,
+              "unitType": "lines",
+              "level": "none",
+              "comment": "This method has 3 lines of code.",
+              "context": []
+            },
+            {
+              "metricsId": "maximum-nesting-level",
+              "value": 1,
+              "level": "none",
+              "comment": "This method has a nesting level of 1.",
+              "context": [
+                {
+                  "message": "Block function body increases depth",
+                  "codeSpan": {
+                    "start": { "offset": 1050, "line": 31, "column": 23 },
+                    "end": { "offset": 1094, "line": 33, "column": 4 },
+                    "text": "{\r\n    Get.toNamed(RouteName.register);\r\n  }"
+                  }
+                }
+              ]
+            },
+            {
+              "metricsId": "number-of-parameters",
+              "value": 0,
+              "level": "none",
+              "comment": "This method has 0 parameters.",
+              "context": []
+            },
+            {
+              "metricsId": "source-lines-of-code",
+              "value": 1,
+              "unitType": "line",
+              "level": "none",
+              "comment": "This method has 1 source line of code.",
+              "context": [
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1053, "line": 32, "column": 0 },
+                    "end": { "offset": 1053, "line": 32, "column": 0 },
+                    "text": ""
+                  }
+                }
+              ]
+            },
+            {
+              "metricsId": "maintainability-index",
+              "value": 94,
+              "level": "none",
+              "comment": "This method has 94 maintainability index.",
+              "context": []
+            }
+          ]
+        },
+        "LoginController.onClose": {
+          "codeSpan": {
+            "start": { "offset": 1113, "line": 36, "column": 3 },
+            "end": { "offset": 1226, "line": 40, "column": 4 },
+            "text": "void onClose() {\r\n    usernameController.dispose();\r\n    passwordController.dispose();\r\n    super.onClose();\r\n  }"
+          },
+          "metrics": [
+            {
+              "metricsId": "cyclomatic-complexity",
+              "value": 1,
+              "level": "none",
+              "comment": "This method has a cyclomatic complexity of 1.",
+              "context": []
+            },
+            {
+              "metricsId": "halstead-volume",
+              "value": 10.0,
+              "level": "none",
+              "comment": "This method has a halstead volume of 10.0.",
+              "context": []
+            },
+            {
+              "metricsId": "lines-of-code",
+              "value": 6,
+              "unitType": "lines",
+              "level": "none",
+              "comment": "This method has 6 lines of code.",
+              "context": []
+            },
+            {
+              "metricsId": "maximum-nesting-level",
+              "value": 1,
+              "level": "none",
+              "comment": "This method has a nesting level of 1.",
+              "context": [
+                {
+                  "message": "Block function body increases depth",
+                  "codeSpan": {
+                    "start": { "offset": 1128, "line": 36, "column": 18 },
+                    "end": { "offset": 1226, "line": 40, "column": 4 },
+                    "text": "{\r\n    usernameController.dispose();\r\n    passwordController.dispose();\r\n    super.onClose();\r\n  }"
+                  }
+                }
+              ]
+            },
+            {
+              "metricsId": "number-of-parameters",
+              "value": 0,
+              "level": "none",
+              "comment": "This method has 0 parameters.",
+              "context": []
+            },
+            {
+              "metricsId": "source-lines-of-code",
+              "value": 3,
+              "unitType": "lines",
+              "level": "none",
+              "comment": "This method has 3 source lines of code.",
+              "context": [
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1131, "line": 37, "column": 0 },
+                    "end": { "offset": 1131, "line": 37, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1166, "line": 38, "column": 0 },
+                    "end": { "offset": 1166, "line": 38, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1201, "line": 39, "column": 0 },
+                    "end": { "offset": 1201, "line": 39, "column": 0 },
+                    "text": ""
+                  }
+                }
+              ]
+            },
+            {
+              "metricsId": "maintainability-index",
+              "value": 83,
+              "level": "none",
+              "comment": "This method has 83 maintainability index.",
+              "context": []
+            }
+          ]
+        }
+      },
+      "issues": [
+        {
+          "ruleId": "newline-before-return",
+          "documentation": "https://dartcodemetrics.dev/docs/rules/common/newline-before-return",
+          "codeSpan": {
+            "start": { "offset": 732, "line": 16, "column": 7 },
+            "end": { "offset": 739, "line": 16, "column": 14 },
+            "text": "return;"
+          },
+          "severity": "style",
+          "message": "Missing blank line before return."
+        }
+      ],
+      "antiPatternCases": []
+    },
+    {
+      "path": "lib\\app\\modules\\auth\\controllers\\register_controller.dart",
+      "fileMetrics": [
+        {
+          "metricsId": "technical-debt",
+          "value": 0.0,
+          "level": "none",
+          "comment": "This compilation unit has 0.0 swe hours of debt.",
+          "context": []
+        }
+      ],
+      "classes": {
+        "RegisterController": {
+          "codeSpan": {
+            "start": { "offset": 268, "line": 9, "column": 1 },
+            "end": { "offset": 2073, "line": 75, "column": 2 },
+            "text": "class RegisterController extends GetxController {\r\n  final AuthService _authService = Get.find<AuthService>();\r\n\r\n  final TextEditingController usernameController = TextEditingController();\r\n  final TextEditingController emailController = TextEditingController();\r\n  final TextEditingController passwordController = TextEditingController();\r\n  final Rx<File?> photoFile = Rx<File?>(null);\r\n  final RxBool isLoading = false.obs;\r\n\r\n  final ImagePicker _picker = ImagePicker();\r\n\r\n  Future<void> pickPhoto() async {\r\n    final XFile? pickedFile =\r\n        await _picker.pickImage(source: ImageSource.gallery);\r\n    if (pickedFile != null) {\r\n      photoFile.value = File(pickedFile.path);\r\n    }\r\n  }\r\n\r\n  Future<void> register() async {\r\n    if (usernameController.text.isEmpty ||\r\n        emailController.text.isEmpty ||\r\n        passwordController.text.isEmpty) {\r\n      Get.snackbar(\r\n        'Error',\r\n        'Semua kolom harus diisi.',\r\n        snackPosition: SnackPosition.BOTTOM,\r\n      );\r\n      return;\r\n    }\r\n    if (!GetUtils.isEmail(emailController.text)) {\r\n      Get.snackbar(\r\n        'Error',\r\n        'Format email tidak valid.',\r\n        snackPosition: SnackPosition.BOTTOM,\r\n      );\r\n      return;\r\n    }\r\n\r\n    isLoading.value = true;\r\n    final success = await _authService.registerUser(\r\n      username: usernameController.text,\r\n      email: emailController.text,\r\n      password: passwordController.text,\r\n      photo: photoFile.value,\r\n    );\r\n    isLoading.value = false;\r\n\r\n    if (success) {\r\n      Get.offAllNamed(\r\n        RouteName.main,\r\n      );\r\n    }\r\n  }\r\n\r\n  void goToLogin() {\r\n    Get.back();\r\n  }\r\n\r\n  @override\r\n  void onClose() {\r\n    usernameController.dispose();\r\n    emailController.dispose();\r\n    passwordController.dispose();\r\n    super.onClose();\r\n  }\r\n}"
+          },
+          "metrics": [
+            {
+              "metricsId": "number-of-methods",
+              "value": 4,
+              "unitType": "methods",
+              "level": "none",
+              "comment": "This class has 4 methods.",
+              "context": [
+                {
+                  "message": "method pickPhoto increase metric value",
+                  "codeSpan": {
+                    "start": { "offset": 749, "line": 20, "column": 3 },
+                    "end": { "offset": 966, "line": 26, "column": 4 },
+                    "text": "Future<void> pickPhoto() async {\r\n    final XFile? pickedFile =\r\n        await _picker.pickImage(source: ImageSource.gallery);\r\n    if (pickedFile != null) {\r\n      photoFile.value = File(pickedFile.path);\r\n    }\r\n  }"
+                  }
+                },
+                {
+                  "message": "method register increase metric value",
+                  "codeSpan": {
+                    "start": { "offset": 972, "line": 28, "column": 3 },
+                    "end": { "offset": 1860, "line": 62, "column": 4 },
+                    "text": "Future<void> register() async {\r\n    if (usernameController.text.isEmpty ||\r\n        emailController.text.isEmpty ||\r\n        passwordController.text.isEmpty) {\r\n      Get.snackbar(\r\n        'Error',\r\n        'Semua kolom harus diisi.',\r\n        snackPosition: SnackPosition.BOTTOM,\r\n      );\r\n      return;\r\n    }\r\n    if (!GetUtils.isEmail(emailController.text)) {\r\n      Get.snackbar(\r\n        'Error',\r\n        'Format email tidak valid.',\r\n        snackPosition: SnackPosition.BOTTOM,\r\n      );\r\n      return;\r\n    }\r\n\r\n    isLoading.value = true;\r\n    final success = await _authService.registerUser(\r\n      username: usernameController.text,\r\n      email: emailController.text,\r\n      password: passwordController.text,\r\n      photo: photoFile.value,\r\n    );\r\n    isLoading.value = false;\r\n\r\n    if (success) {\r\n      Get.offAllNamed(\r\n        RouteName.main,\r\n      );\r\n    }\r\n  }"
+                  }
+                },
+                {
+                  "message": "method goToLogin increase metric value",
+                  "codeSpan": {
+                    "start": { "offset": 1866, "line": 64, "column": 3 },
+                    "end": { "offset": 1906, "line": 66, "column": 4 },
+                    "text": "void goToLogin() {\r\n    Get.back();\r\n  }"
+                  }
+                },
+                {
+                  "message": "method onClose increase metric value",
+                  "codeSpan": {
+                    "start": { "offset": 1925, "line": 69, "column": 3 },
+                    "end": { "offset": 2070, "line": 74, "column": 4 },
+                    "text": "void onClose() {\r\n    usernameController.dispose();\r\n    emailController.dispose();\r\n    passwordController.dispose();\r\n    super.onClose();\r\n  }"
+                  }
+                }
+              ]
+            },
+            {
+              "metricsId": "weight-of-class",
+              "value": 1.0,
+              "level": "none",
+              "comment": "This class has a weight of 1.0.",
+              "context": [
+                {
+                  "message": "functional method pickPhoto increase metric value",
+                  "codeSpan": {
+                    "start": { "offset": 749, "line": 20, "column": 3 },
+                    "end": { "offset": 966, "line": 26, "column": 4 },
+                    "text": "Future<void> pickPhoto() async {\r\n    final XFile? pickedFile =\r\n        await _picker.pickImage(source: ImageSource.gallery);\r\n    if (pickedFile != null) {\r\n      photoFile.value = File(pickedFile.path);\r\n    }\r\n  }"
+                  }
+                },
+                {
+                  "message": "functional method register increase metric value",
+                  "codeSpan": {
+                    "start": { "offset": 972, "line": 28, "column": 3 },
+                    "end": { "offset": 1860, "line": 62, "column": 4 },
+                    "text": "Future<void> register() async {\r\n    if (usernameController.text.isEmpty ||\r\n        emailController.text.isEmpty ||\r\n        passwordController.text.isEmpty) {\r\n      Get.snackbar(\r\n        'Error',\r\n        'Semua kolom harus diisi.',\r\n        snackPosition: SnackPosition.BOTTOM,\r\n      );\r\n      return;\r\n    }\r\n    if (!GetUtils.isEmail(emailController.text)) {\r\n      Get.snackbar(\r\n        'Error',\r\n        'Format email tidak valid.',\r\n        snackPosition: SnackPosition.BOTTOM,\r\n      );\r\n      return;\r\n    }\r\n\r\n    isLoading.value = true;\r\n    final success = await _authService.registerUser(\r\n      username: usernameController.text,\r\n      email: emailController.text,\r\n      password: passwordController.text,\r\n      photo: photoFile.value,\r\n    );\r\n    isLoading.value = false;\r\n\r\n    if (success) {\r\n      Get.offAllNamed(\r\n        RouteName.main,\r\n      );\r\n    }\r\n  }"
+                  }
+                },
+                {
+                  "message": "functional method goToLogin increase metric value",
+                  "codeSpan": {
+                    "start": { "offset": 1866, "line": 64, "column": 3 },
+                    "end": { "offset": 1906, "line": 66, "column": 4 },
+                    "text": "void goToLogin() {\r\n    Get.back();\r\n  }"
+                  }
+                },
+                {
+                  "message": "functional method onClose increase metric value",
+                  "codeSpan": {
+                    "start": { "offset": 1925, "line": 69, "column": 3 },
+                    "end": { "offset": 2070, "line": 74, "column": 4 },
+                    "text": "void onClose() {\r\n    usernameController.dispose();\r\n    emailController.dispose();\r\n    passwordController.dispose();\r\n    super.onClose();\r\n  }"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "functions": {
+        "RegisterController.pickPhoto": {
+          "codeSpan": {
+            "start": { "offset": 749, "line": 20, "column": 3 },
+            "end": { "offset": 966, "line": 26, "column": 4 },
+            "text": "Future<void> pickPhoto() async {\r\n    final XFile? pickedFile =\r\n        await _picker.pickImage(source: ImageSource.gallery);\r\n    if (pickedFile != null) {\r\n      photoFile.value = File(pickedFile.path);\r\n    }\r\n  }"
+          },
+          "metrics": [
+            {
+              "metricsId": "cyclomatic-complexity",
+              "value": 2,
+              "level": "none",
+              "comment": "This method has a cyclomatic complexity of 2.",
+              "context": [
+                {
+                  "message": "If statement increases complexity",
+                  "codeSpan": {
+                    "start": { "offset": 881, "line": 23, "column": 5 },
+                    "end": { "offset": 961, "line": 25, "column": 6 },
+                    "text": "if (pickedFile != null) {\r\n      photoFile.value = File(pickedFile.path);\r\n    }"
+                  }
+                }
+              ]
+            },
+            {
+              "metricsId": "halstead-volume",
+              "value": 70.32403072095333,
+              "level": "none",
+              "comment": "This method has a halstead volume of 70.32403072095333.",
+              "context": []
+            },
+            {
+              "metricsId": "lines-of-code",
+              "value": 7,
+              "unitType": "lines",
+              "level": "none",
+              "comment": "This method has 7 lines of code.",
+              "context": []
+            },
+            {
+              "metricsId": "maximum-nesting-level",
+              "value": 2,
+              "level": "none",
+              "comment": "This method has a nesting level of 2.",
+              "context": [
+                {
+                  "message": "Block function body increases depth",
+                  "codeSpan": {
+                    "start": { "offset": 780, "line": 20, "column": 34 },
+                    "end": { "offset": 966, "line": 26, "column": 4 },
+                    "text": "{\r\n    final XFile? pickedFile =\r\n        await _picker.pickImage(source: ImageSource.gallery);\r\n    if (pickedFile != null) {\r\n      photoFile.value = File(pickedFile.path);\r\n    }\r\n  }"
+                  }
+                },
+                {
+                  "message": "If statement increases depth",
+                  "codeSpan": {
+                    "start": { "offset": 905, "line": 23, "column": 29 },
+                    "end": { "offset": 961, "line": 25, "column": 6 },
+                    "text": "{\r\n      photoFile.value = File(pickedFile.path);\r\n    }"
+                  }
+                }
+              ]
+            },
+            {
+              "metricsId": "number-of-parameters",
+              "value": 0,
+              "level": "none",
+              "comment": "This method has 0 parameters.",
+              "context": []
+            },
+            {
+              "metricsId": "source-lines-of-code",
+              "value": 5,
+              "unitType": "lines",
+              "level": "none",
+              "comment": "This method has 5 source lines of code.",
+              "context": [
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 783, "line": 21, "column": 0 },
+                    "end": { "offset": 783, "line": 21, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 814, "line": 22, "column": 0 },
+                    "end": { "offset": 814, "line": 22, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 877, "line": 23, "column": 0 },
+                    "end": { "offset": 877, "line": 23, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 908, "line": 24, "column": 0 },
+                    "end": { "offset": 908, "line": 24, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 956, "line": 25, "column": 0 },
+                    "end": { "offset": 956, "line": 25, "column": 0 },
+                    "text": ""
+                  }
+                }
+              ]
+            },
+            {
+              "metricsId": "maintainability-index",
+              "value": 72,
+              "level": "none",
+              "comment": "This method has 72 maintainability index.",
+              "context": []
+            }
+          ]
+        },
+        "RegisterController.register": {
+          "codeSpan": {
+            "start": { "offset": 972, "line": 28, "column": 3 },
+            "end": { "offset": 1860, "line": 62, "column": 4 },
+            "text": "Future<void> register() async {\r\n    if (usernameController.text.isEmpty ||\r\n        emailController.text.isEmpty ||\r\n        passwordController.text.isEmpty) {\r\n      Get.snackbar(\r\n        'Error',\r\n        'Semua kolom harus diisi.',\r\n        snackPosition: SnackPosition.BOTTOM,\r\n      );\r\n      return;\r\n    }\r\n    if (!GetUtils.isEmail(emailController.text)) {\r\n      Get.snackbar(\r\n        'Error',\r\n        'Format email tidak valid.',\r\n        snackPosition: SnackPosition.BOTTOM,\r\n      );\r\n      return;\r\n    }\r\n\r\n    isLoading.value = true;\r\n    final success = await _authService.registerUser(\r\n      username: usernameController.text,\r\n      email: emailController.text,\r\n      password: passwordController.text,\r\n      photo: photoFile.value,\r\n    );\r\n    isLoading.value = false;\r\n\r\n    if (success) {\r\n      Get.offAllNamed(\r\n        RouteName.main,\r\n      );\r\n    }\r\n  }"
+          },
+          "metrics": [
+            {
+              "metricsId": "cyclomatic-complexity",
+              "value": 6,
+              "level": "none",
+              "comment": "This method has a cyclomatic complexity of 6.",
+              "context": [
+                {
+                  "message": "If statement increases complexity",
+                  "codeSpan": {
+                    "start": { "offset": 1009, "line": 29, "column": 5 },
+                    "end": { "offset": 1286, "line": 38, "column": 6 },
+                    "text": "if (usernameController.text.isEmpty ||\r\n        emailController.text.isEmpty ||\r\n        passwordController.text.isEmpty) {\r\n      Get.snackbar(\r\n        'Error',\r\n        'Semua kolom harus diisi.',\r\n        snackPosition: SnackPosition.BOTTOM,\r\n      );\r\n      return;\r\n    }"
+                  }
+                },
+                {
+                  "message": "Operator || increases complexity",
+                  "codeSpan": {
+                    "start": { "offset": 1045, "line": 29, "column": 41 },
+                    "end": { "offset": 1047, "line": 29, "column": 43 },
+                    "text": "||"
+                  }
+                },
+                {
+                  "message": "Operator || increases complexity",
+                  "codeSpan": {
+                    "start": { "offset": 1086, "line": 30, "column": 38 },
+                    "end": { "offset": 1088, "line": 30, "column": 40 },
+                    "text": "||"
+                  }
+                },
+                {
+                  "message": "If statement increases complexity",
+                  "codeSpan": {
+                    "start": { "offset": 1292, "line": 39, "column": 5 },
+                    "end": { "offset": 1493, "line": 46, "column": 6 },
+                    "text": "if (!GetUtils.isEmail(emailController.text)) {\r\n      Get.snackbar(\r\n        'Error',\r\n        'Format email tidak valid.',\r\n        snackPosition: SnackPosition.BOTTOM,\r\n      );\r\n      return;\r\n    }"
+                  }
+                },
+                {
+                  "message": "If statement increases complexity",
+                  "codeSpan": {
+                    "start": { "offset": 1775, "line": 57, "column": 5 },
+                    "end": { "offset": 1855, "line": 61, "column": 6 },
+                    "text": "if (success) {\r\n      Get.offAllNamed(\r\n        RouteName.main,\r\n      );\r\n    }"
+                  }
+                }
+              ]
+            },
+            {
+              "metricsId": "halstead-volume",
+              "value": 262.33097373688895,
+              "level": "none",
+              "comment": "This method has a halstead volume of 262.33097373688895.",
+              "context": []
+            },
+            {
+              "metricsId": "lines-of-code",
+              "value": 35,
+              "unitType": "lines",
+              "level": "none",
+              "comment": "This method has 35 lines of code.",
+              "context": []
+            },
+            {
+              "metricsId": "maximum-nesting-level",
+              "value": 2,
+              "level": "none",
+              "comment": "This method has a nesting level of 2.",
+              "context": [
+                {
+                  "message": "Block function body increases depth",
+                  "codeSpan": {
+                    "start": { "offset": 1002, "line": 28, "column": 33 },
+                    "end": { "offset": 1860, "line": 62, "column": 4 },
+                    "text": "{\r\n    if (usernameController.text.isEmpty ||\r\n        emailController.text.isEmpty ||\r\n        passwordController.text.isEmpty) {\r\n      Get.snackbar(\r\n        'Error',\r\n        'Semua kolom harus diisi.',\r\n        snackPosition: SnackPosition.BOTTOM,\r\n      );\r\n      return;\r\n    }\r\n    if (!GetUtils.isEmail(emailController.text)) {\r\n      Get.snackbar(\r\n        'Error',\r\n        'Format email tidak valid.',\r\n        snackPosition: SnackPosition.BOTTOM,\r\n      );\r\n      return;\r\n    }\r\n\r\n    isLoading.value = true;\r\n    final success = await _authService.registerUser(\r\n      username: usernameController.text,\r\n      email: emailController.text,\r\n      password: passwordController.text,\r\n      photo: photoFile.value,\r\n    );\r\n    isLoading.value = false;\r\n\r\n    if (success) {\r\n      Get.offAllNamed(\r\n        RouteName.main,\r\n      );\r\n    }\r\n  }"
+                  }
+                },
+                {
+                  "message": "If statement increases depth",
+                  "codeSpan": {
+                    "start": { "offset": 1131, "line": 31, "column": 42 },
+                    "end": { "offset": 1286, "line": 38, "column": 6 },
+                    "text": "{\r\n      Get.snackbar(\r\n        'Error',\r\n        'Semua kolom harus diisi.',\r\n        snackPosition: SnackPosition.BOTTOM,\r\n      );\r\n      return;\r\n    }"
+                  }
+                }
+              ]
+            },
+            {
+              "metricsId": "number-of-parameters",
+              "value": 0,
+              "level": "none",
+              "comment": "This method has 0 parameters.",
+              "context": []
+            },
+            {
+              "metricsId": "source-lines-of-code",
+              "value": 31,
+              "unitType": "lines",
+              "level": "none",
+              "comment": "This method has 31 source lines of code.",
+              "context": [
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1005, "line": 29, "column": 0 },
+                    "end": { "offset": 1005, "line": 29, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1049, "line": 30, "column": 0 },
+                    "end": { "offset": 1049, "line": 30, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1090, "line": 31, "column": 0 },
+                    "end": { "offset": 1090, "line": 31, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1134, "line": 32, "column": 0 },
+                    "end": { "offset": 1134, "line": 32, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1155, "line": 33, "column": 0 },
+                    "end": { "offset": 1155, "line": 33, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1173, "line": 34, "column": 0 },
+                    "end": { "offset": 1173, "line": 34, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1210, "line": 35, "column": 0 },
+                    "end": { "offset": 1210, "line": 35, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1256, "line": 36, "column": 0 },
+                    "end": { "offset": 1256, "line": 36, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1266, "line": 37, "column": 0 },
+                    "end": { "offset": 1266, "line": 37, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1281, "line": 38, "column": 0 },
+                    "end": { "offset": 1281, "line": 38, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1288, "line": 39, "column": 0 },
+                    "end": { "offset": 1288, "line": 39, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1340, "line": 40, "column": 0 },
+                    "end": { "offset": 1340, "line": 40, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1361, "line": 41, "column": 0 },
+                    "end": { "offset": 1361, "line": 41, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1379, "line": 42, "column": 0 },
+                    "end": { "offset": 1379, "line": 42, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1417, "line": 43, "column": 0 },
+                    "end": { "offset": 1417, "line": 43, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1463, "line": 44, "column": 0 },
+                    "end": { "offset": 1463, "line": 44, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1473, "line": 45, "column": 0 },
+                    "end": { "offset": 1473, "line": 45, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1488, "line": 46, "column": 0 },
+                    "end": { "offset": 1488, "line": 46, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1497, "line": 48, "column": 0 },
+                    "end": { "offset": 1497, "line": 48, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1526, "line": 49, "column": 0 },
+                    "end": { "offset": 1526, "line": 49, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1580, "line": 50, "column": 0 },
+                    "end": { "offset": 1580, "line": 50, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1622, "line": 51, "column": 0 },
+                    "end": { "offset": 1622, "line": 51, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1658, "line": 52, "column": 0 },
+                    "end": { "offset": 1658, "line": 52, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1700, "line": 53, "column": 0 },
+                    "end": { "offset": 1700, "line": 53, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1731, "line": 54, "column": 0 },
+                    "end": { "offset": 1731, "line": 54, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1739, "line": 55, "column": 0 },
+                    "end": { "offset": 1739, "line": 55, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1771, "line": 57, "column": 0 },
+                    "end": { "offset": 1771, "line": 57, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1791, "line": 58, "column": 0 },
+                    "end": { "offset": 1791, "line": 58, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1815, "line": 59, "column": 0 },
+                    "end": { "offset": 1815, "line": 59, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1840, "line": 60, "column": 0 },
+                    "end": { "offset": 1840, "line": 60, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1850, "line": 61, "column": 0 },
+                    "end": { "offset": 1850, "line": 61, "column": 0 },
+                    "text": ""
+                  }
+                }
+              ]
+            },
+            {
+              "metricsId": "maintainability-index",
+              "value": 50,
+              "level": "noted",
+              "comment": "This method has 50 maintainability index.",
+              "context": []
+            }
+          ]
+        },
+        "RegisterController.goToLogin": {
+          "codeSpan": {
+            "start": { "offset": 1866, "line": 64, "column": 3 },
+            "end": { "offset": 1906, "line": 66, "column": 4 },
+            "text": "void goToLogin() {\r\n    Get.back();\r\n  }"
+          },
+          "metrics": [
+            {
+              "metricsId": "cyclomatic-complexity",
+              "value": 1,
+              "level": "none",
+              "comment": "This method has a cyclomatic complexity of 1.",
+              "context": []
+            },
+            {
+              "metricsId": "halstead-volume",
+              "value": 2.0,
+              "level": "none",
+              "comment": "This method has a halstead volume of 2.0.",
+              "context": []
+            },
+            {
+              "metricsId": "lines-of-code",
+              "value": 3,
+              "unitType": "lines",
+              "level": "none",
+              "comment": "This method has 3 lines of code.",
+              "context": []
+            },
+            {
+              "metricsId": "maximum-nesting-level",
+              "value": 1,
+              "level": "none",
+              "comment": "This method has a nesting level of 1.",
+              "context": [
+                {
+                  "message": "Block function body increases depth",
+                  "codeSpan": {
+                    "start": { "offset": 1883, "line": 64, "column": 20 },
+                    "end": { "offset": 1906, "line": 66, "column": 4 },
+                    "text": "{\r\n    Get.back();\r\n  }"
+                  }
+                }
+              ]
+            },
+            {
+              "metricsId": "number-of-parameters",
+              "value": 0,
+              "level": "none",
+              "comment": "This method has 0 parameters.",
+              "context": []
+            },
+            {
+              "metricsId": "source-lines-of-code",
+              "value": 1,
+              "unitType": "line",
+              "level": "none",
+              "comment": "This method has 1 source line of code.",
+              "context": [
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1886, "line": 65, "column": 0 },
+                    "end": { "offset": 1886, "line": 65, "column": 0 },
+                    "text": ""
+                  }
+                }
+              ]
+            },
+            {
+              "metricsId": "maintainability-index",
+              "value": 98,
+              "level": "none",
+              "comment": "This method has 98 maintainability index.",
+              "context": []
+            }
+          ]
+        },
+        "RegisterController.onClose": {
+          "codeSpan": {
+            "start": { "offset": 1925, "line": 69, "column": 3 },
+            "end": { "offset": 2070, "line": 74, "column": 4 },
+            "text": "void onClose() {\r\n    usernameController.dispose();\r\n    emailController.dispose();\r\n    passwordController.dispose();\r\n    super.onClose();\r\n  }"
+          },
+          "metrics": [
+            {
+              "metricsId": "cyclomatic-complexity",
+              "value": 1,
+              "level": "none",
+              "comment": "This method has a cyclomatic complexity of 1.",
+              "context": []
+            },
+            {
+              "metricsId": "halstead-volume",
+              "value": 16.253496664211536,
+              "level": "none",
+              "comment": "This method has a halstead volume of 16.253496664211536.",
+              "context": []
+            },
+            {
+              "metricsId": "lines-of-code",
+              "value": 7,
+              "unitType": "lines",
+              "level": "none",
+              "comment": "This method has 7 lines of code.",
+              "context": []
+            },
+            {
+              "metricsId": "maximum-nesting-level",
+              "value": 1,
+              "level": "none",
+              "comment": "This method has a nesting level of 1.",
+              "context": [
+                {
+                  "message": "Block function body increases depth",
+                  "codeSpan": {
+                    "start": { "offset": 1940, "line": 69, "column": 18 },
+                    "end": { "offset": 2070, "line": 74, "column": 4 },
+                    "text": "{\r\n    usernameController.dispose();\r\n    emailController.dispose();\r\n    passwordController.dispose();\r\n    super.onClose();\r\n  }"
+                  }
+                }
+              ]
+            },
+            {
+              "metricsId": "number-of-parameters",
+              "value": 0,
+              "level": "none",
+              "comment": "This method has 0 parameters.",
+              "context": []
+            },
+            {
+              "metricsId": "source-lines-of-code",
+              "value": 4,
+              "unitType": "lines",
+              "level": "none",
+              "comment": "This method has 4 source lines of code.",
+              "context": [
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1943, "line": 70, "column": 0 },
+                    "end": { "offset": 1943, "line": 70, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1978, "line": 71, "column": 0 },
+                    "end": { "offset": 1978, "line": 71, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 2010, "line": 72, "column": 0 },
+                    "end": { "offset": 2010, "line": 72, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 2045, "line": 73, "column": 0 },
+                    "end": { "offset": 2045, "line": 73, "column": 0 },
+                    "text": ""
+                  }
+                }
+              ]
+            },
+            {
+              "metricsId": "maintainability-index",
+              "value": 79,
+              "level": "none",
+              "comment": "This method has 79 maintainability index.",
+              "context": []
+            }
+          ]
+        }
+      },
+      "issues": [
+        {
+          "ruleId": "newline-before-return",
+          "documentation": "https://dartcodemetrics.dev/docs/rules/common/newline-before-return",
+          "codeSpan": {
+            "start": { "offset": 1272, "line": 37, "column": 7 },
+            "end": { "offset": 1279, "line": 37, "column": 14 },
+            "text": "return;"
+          },
+          "severity": "style",
+          "message": "Missing blank line before return."
+        },
+        {
+          "ruleId": "newline-before-return",
+          "documentation": "https://dartcodemetrics.dev/docs/rules/common/newline-before-return",
+          "codeSpan": {
+            "start": { "offset": 1479, "line": 45, "column": 7 },
+            "end": { "offset": 1486, "line": 45, "column": 14 },
+            "text": "return;"
+          },
+          "severity": "style",
+          "message": "Missing blank line before return."
+        }
+      ],
+      "antiPatternCases": []
+    },
+    {
+      "path": "lib\\app\\modules\\auth\\views\\login_view.dart",
+      "fileMetrics": [
+        {
+          "metricsId": "technical-debt",
+          "value": 0.0,
+          "level": "none",
+          "comment": "This compilation unit has 0.0 swe hours of debt.",
+          "context": []
+        }
+      ],
+      "classes": {
+        "LoginView": {
+          "codeSpan": {
+            "start": { "offset": 156, "line": 5, "column": 1 },
+            "end": { "offset": 1800, "line": 54, "column": 2 },
+            "text": "class LoginView extends GetView<LoginController> {\r\n  const LoginView({super.key});\r\n\r\n  @override\r\n  Widget build(BuildContext context) {\r\n    return Scaffold(\r\n      appBar: AppBar(\r\n        title: const Text('Login'),\r\n        centerTitle: true,\r\n      ),\r\n      body: Padding(\r\n        padding: const EdgeInsets.all(16.0),\r\n        child: Column(\r\n          mainAxisAlignment: MainAxisAlignment.center,\r\n          children: [\r\n            TextField(\r\n              controller: controller.usernameController,\r\n              decoration: const InputDecoration(\r\n                labelText: 'Username',\r\n                border: OutlineInputBorder(),\r\n              ),\r\n            ),\r\n            const SizedBox(height: 16),\r\n            TextField(\r\n              controller: controller.passwordController,\r\n              obscureText: true,\r\n              decoration: const InputDecoration(\r\n                labelText: 'Password',\r\n                border: OutlineInputBorder(),\r\n              ),\r\n            ),\r\n            const SizedBox(height: 24),\r\n            Obx(() => ElevatedButton(\r\n                  onPressed:\r\n                      controller.isLoading.value ? null : controller.login,\r\n                  child: controller.isLoading.value\r\n                      ? const CircularProgressIndicator(color: Colors.white)\r\n                      : const Text('Login'),\r\n                )),\r\n            const SizedBox(height: 16),\r\n            TextButton(\r\n              onPressed: controller.goToRegister,\r\n              child: const Text('Belum punya akun? Register'),\r\n            ),\r\n          ],\r\n        ),\r\n      ),\r\n    );\r\n  }\r\n}"
+          },
+          "metrics": [
+            {
+              "metricsId": "number-of-methods",
+              "value": 2,
+              "unitType": "methods",
+              "level": "none",
+              "comment": "This class has 2 methods.",
+              "context": [
+                {
+                  "message": "constructor LoginView increase metric value",
+                  "codeSpan": {
+                    "start": { "offset": 210, "line": 6, "column": 3 },
+                    "end": { "offset": 239, "line": 6, "column": 32 },
+                    "text": "const LoginView({super.key});"
+                  }
+                },
+                {
+                  "message": "method build increase metric value",
+                  "codeSpan": {
+                    "start": { "offset": 258, "line": 9, "column": 3 },
+                    "end": { "offset": 1797, "line": 53, "column": 4 },
+                    "text": "Widget build(BuildContext context) {\r\n    return Scaffold(\r\n      appBar: AppBar(\r\n        title: const Text('Login'),\r\n        centerTitle: true,\r\n      ),\r\n      body: Padding(\r\n        padding: const EdgeInsets.all(16.0),\r\n        child: Column(\r\n          mainAxisAlignment: MainAxisAlignment.center,\r\n          children: [\r\n            TextField(\r\n              controller: controller.usernameController,\r\n              decoration: const InputDecoration(\r\n                labelText: 'Username',\r\n                border: OutlineInputBorder(),\r\n              ),\r\n            ),\r\n            const SizedBox(height: 16),\r\n            TextField(\r\n              controller: controller.passwordController,\r\n              obscureText: true,\r\n              decoration: const InputDecoration(\r\n                labelText: 'Password',\r\n                border: OutlineInputBorder(),\r\n              ),\r\n            ),\r\n            const SizedBox(height: 24),\r\n            Obx(() => ElevatedButton(\r\n                  onPressed:\r\n                      controller.isLoading.value ? null : controller.login,\r\n                  child: controller.isLoading.value\r\n                      ? const CircularProgressIndicator(color: Colors.white)\r\n                      : const Text('Login'),\r\n                )),\r\n            const SizedBox(height: 16),\r\n            TextButton(\r\n              onPressed: controller.goToRegister,\r\n              child: const Text('Belum punya akun? Register'),\r\n            ),\r\n          ],\r\n        ),\r\n      ),\r\n    );\r\n  }"
+                  }
+                }
+              ]
+            },
+            {
+              "metricsId": "weight-of-class",
+              "value": 0.5,
+              "level": "none",
+              "comment": "This class has a weight of 0.5.",
+              "context": [
+                {
+                  "message": "public constructor LoginView decrease metric value",
+                  "codeSpan": {
+                    "start": { "offset": 210, "line": 6, "column": 3 },
+                    "end": { "offset": 239, "line": 6, "column": 32 },
+                    "text": "const LoginView({super.key});"
+                  }
+                },
+                {
+                  "message": "functional method build increase metric value",
+                  "codeSpan": {
+                    "start": { "offset": 258, "line": 9, "column": 3 },
+                    "end": { "offset": 1797, "line": 53, "column": 4 },
+                    "text": "Widget build(BuildContext context) {\r\n    return Scaffold(\r\n      appBar: AppBar(\r\n        title: const Text('Login'),\r\n        centerTitle: true,\r\n      ),\r\n      body: Padding(\r\n        padding: const EdgeInsets.all(16.0),\r\n        child: Column(\r\n          mainAxisAlignment: MainAxisAlignment.center,\r\n          children: [\r\n            TextField(\r\n              controller: controller.usernameController,\r\n              decoration: const InputDecoration(\r\n                labelText: 'Username',\r\n                border: OutlineInputBorder(),\r\n              ),\r\n            ),\r\n            const SizedBox(height: 16),\r\n            TextField(\r\n              controller: controller.passwordController,\r\n              obscureText: true,\r\n              decoration: const InputDecoration(\r\n                labelText: 'Password',\r\n                border: OutlineInputBorder(),\r\n              ),\r\n            ),\r\n            const SizedBox(height: 24),\r\n            Obx(() => ElevatedButton(\r\n                  onPressed:\r\n                      controller.isLoading.value ? null : controller.login,\r\n                  child: controller.isLoading.value\r\n                      ? const CircularProgressIndicator(color: Colors.white)\r\n                      : const Text('Login'),\r\n                )),\r\n            const SizedBox(height: 16),\r\n            TextButton(\r\n              onPressed: controller.goToRegister,\r\n              child: const Text('Belum punya akun? Register'),\r\n            ),\r\n          ],\r\n        ),\r\n      ),\r\n    );\r\n  }"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "functions": {
+        "LoginView.LoginView": {
+          "codeSpan": {
+            "start": { "offset": 210, "line": 6, "column": 3 },
+            "end": { "offset": 239, "line": 6, "column": 32 },
+            "text": "const LoginView({super.key});"
+          },
+          "metrics": [
+            {
+              "metricsId": "cyclomatic-complexity",
+              "value": 1,
+              "level": "none",
+              "comment": "This constructor has a cyclomatic complexity of 1.",
+              "context": []
+            },
+            {
+              "metricsId": "halstead-volume",
+              "value": 0.0,
+              "level": "none",
+              "comment": "This constructor has a halstead volume of 0.0.",
+              "context": []
+            },
+            {
+              "metricsId": "lines-of-code",
+              "value": 1,
+              "unitType": "line",
+              "level": "none",
+              "comment": "This constructor has 1 line of code.",
+              "context": []
+            },
+            {
+              "metricsId": "maximum-nesting-level",
+              "value": 0,
+              "level": "none",
+              "comment": "This constructor has a nesting level of 0.",
+              "context": []
+            },
+            {
+              "metricsId": "source-lines-of-code",
+              "value": 0,
+              "unitType": "lines",
+              "level": "none",
+              "comment": "This constructor has 0 source lines of code.",
+              "context": []
+            },
+            {
+              "metricsId": "maintainability-index",
+              "value": 100,
+              "level": "none",
+              "comment": "This constructor has 100 maintainability index.",
+              "context": []
+            }
+          ]
+        },
+        "LoginView.build": {
+          "codeSpan": {
+            "start": { "offset": 258, "line": 9, "column": 3 },
+            "end": { "offset": 1797, "line": 53, "column": 4 },
+            "text": "Widget build(BuildContext context) {\r\n    return Scaffold(\r\n      appBar: AppBar(\r\n        title: const Text('Login'),\r\n        centerTitle: true,\r\n      ),\r\n      body: Padding(\r\n        padding: const EdgeInsets.all(16.0),\r\n        child: Column(\r\n          mainAxisAlignment: MainAxisAlignment.center,\r\n          children: [\r\n            TextField(\r\n              controller: controller.usernameController,\r\n              decoration: const InputDecoration(\r\n                labelText: 'Username',\r\n                border: OutlineInputBorder(),\r\n              ),\r\n            ),\r\n            const SizedBox(height: 16),\r\n            TextField(\r\n              controller: controller.passwordController,\r\n              obscureText: true,\r\n              decoration: const InputDecoration(\r\n                labelText: 'Password',\r\n                border: OutlineInputBorder(),\r\n              ),\r\n            ),\r\n            const SizedBox(height: 24),\r\n            Obx(() => ElevatedButton(\r\n                  onPressed:\r\n                      controller.isLoading.value ? null : controller.login,\r\n                  child: controller.isLoading.value\r\n                      ? const CircularProgressIndicator(color: Colors.white)\r\n                      : const Text('Login'),\r\n                )),\r\n            const SizedBox(height: 16),\r\n            TextButton(\r\n              onPressed: controller.goToRegister,\r\n              child: const Text('Belum punya akun? Register'),\r\n            ),\r\n          ],\r\n        ),\r\n      ),\r\n    );\r\n  }"
+          },
+          "metrics": [
+            {
+              "metricsId": "cyclomatic-complexity",
+              "value": 3,
+              "level": "none",
+              "comment": "This method has a cyclomatic complexity of 3.",
+              "context": [
+                {
+                  "message": "Conditional expression increases complexity",
+                  "codeSpan": {
+                    "start": { "offset": 1300, "line": 39, "column": 23 },
+                    "end": { "offset": 1352, "line": 39, "column": 75 },
+                    "text": "controller.isLoading.value ? null : controller.login"
+                  }
+                },
+                {
+                  "message": "Conditional expression increases complexity",
+                  "codeSpan": {
+                    "start": { "offset": 1380, "line": 40, "column": 26 },
+                    "end": { "offset": 1529, "line": 42, "column": 44 },
+                    "text": "controller.isLoading.value\r\n                      ? const CircularProgressIndicator(color: Colors.white)\r\n                      : const Text('Login')"
+                  }
+                }
+              ]
+            },
+            {
+              "metricsId": "halstead-volume",
+              "value": 458.34698093619465,
+              "level": "none",
+              "comment": "This method has a halstead volume of 458.34698093619465.",
+              "context": []
+            },
+            {
+              "metricsId": "lines-of-code",
+              "value": 46,
+              "unitType": "lines",
+              "level": "none",
+              "comment": "This method has 46 lines of code.",
+              "context": []
+            },
+            {
+              "metricsId": "maximum-nesting-level",
+              "value": 1,
+              "level": "none",
+              "comment": "This method has a nesting level of 1.",
+              "context": [
+                {
+                  "message": "Block function body increases depth",
+                  "codeSpan": {
+                    "start": { "offset": 293, "line": 9, "column": 38 },
+                    "end": { "offset": 1797, "line": 53, "column": 4 },
+                    "text": "{\r\n    return Scaffold(\r\n      appBar: AppBar(\r\n        title: const Text('Login'),\r\n        centerTitle: true,\r\n      ),\r\n      body: Padding(\r\n        padding: const EdgeInsets.all(16.0),\r\n        child: Column(\r\n          mainAxisAlignment: MainAxisAlignment.center,\r\n          children: [\r\n            TextField(\r\n              controller: controller.usernameController,\r\n              decoration: const InputDecoration(\r\n                labelText: 'Username',\r\n                border: OutlineInputBorder(),\r\n              ),\r\n            ),\r\n            const SizedBox(height: 16),\r\n            TextField(\r\n              controller: controller.passwordController,\r\n              obscureText: true,\r\n              decoration: const InputDecoration(\r\n                labelText: 'Password',\r\n                border: OutlineInputBorder(),\r\n              ),\r\n            ),\r\n            const SizedBox(height: 24),\r\n            Obx(() => ElevatedButton(\r\n                  onPressed:\r\n                      controller.isLoading.value ? null : controller.login,\r\n                  child: controller.isLoading.value\r\n                      ? const CircularProgressIndicator(color: Colors.white)\r\n                      : const Text('Login'),\r\n                )),\r\n            const SizedBox(height: 16),\r\n            TextButton(\r\n              onPressed: controller.goToRegister,\r\n              child: const Text('Belum punya akun? Register'),\r\n            ),\r\n          ],\r\n        ),\r\n      ),\r\n    );\r\n  }"
+                  }
+                }
+              ]
+            },
+            {
+              "metricsId": "number-of-parameters",
+              "value": 1,
+              "level": "none",
+              "comment": "This method has 1 parameter.",
+              "context": []
+            },
+            {
+              "metricsId": "source-lines-of-code",
+              "value": 43,
+              "unitType": "lines",
+              "level": "none",
+              "comment": "This method has 43 source lines of code.",
+              "context": [
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 296, "line": 10, "column": 0 },
+                    "end": { "offset": 296, "line": 10, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 318, "line": 11, "column": 0 },
+                    "end": { "offset": 318, "line": 11, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 341, "line": 12, "column": 0 },
+                    "end": { "offset": 341, "line": 12, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 378, "line": 13, "column": 0 },
+                    "end": { "offset": 378, "line": 13, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 406, "line": 14, "column": 0 },
+                    "end": { "offset": 406, "line": 14, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 416, "line": 15, "column": 0 },
+                    "end": { "offset": 416, "line": 15, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 438, "line": 16, "column": 0 },
+                    "end": { "offset": 438, "line": 16, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 484, "line": 17, "column": 0 },
+                    "end": { "offset": 484, "line": 17, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 508, "line": 18, "column": 0 },
+                    "end": { "offset": 508, "line": 18, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 564, "line": 19, "column": 0 },
+                    "end": { "offset": 564, "line": 19, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 587, "line": 20, "column": 0 },
+                    "end": { "offset": 587, "line": 20, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 611, "line": 21, "column": 0 },
+                    "end": { "offset": 611, "line": 21, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 669, "line": 22, "column": 0 },
+                    "end": { "offset": 669, "line": 22, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 719, "line": 23, "column": 0 },
+                    "end": { "offset": 719, "line": 23, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 759, "line": 24, "column": 0 },
+                    "end": { "offset": 759, "line": 24, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 806, "line": 25, "column": 0 },
+                    "end": { "offset": 806, "line": 25, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 824, "line": 26, "column": 0 },
+                    "end": { "offset": 824, "line": 26, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 840, "line": 27, "column": 0 },
+                    "end": { "offset": 840, "line": 27, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 881, "line": 28, "column": 0 },
+                    "end": { "offset": 881, "line": 28, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 905, "line": 29, "column": 0 },
+                    "end": { "offset": 905, "line": 29, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 963, "line": 30, "column": 0 },
+                    "end": { "offset": 963, "line": 30, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 997, "line": 31, "column": 0 },
+                    "end": { "offset": 997, "line": 31, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1047, "line": 32, "column": 0 },
+                    "end": { "offset": 1047, "line": 32, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1087, "line": 33, "column": 0 },
+                    "end": { "offset": 1087, "line": 33, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1134, "line": 34, "column": 0 },
+                    "end": { "offset": 1134, "line": 34, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1152, "line": 35, "column": 0 },
+                    "end": { "offset": 1152, "line": 35, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1168, "line": 36, "column": 0 },
+                    "end": { "offset": 1168, "line": 36, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1209, "line": 37, "column": 0 },
+                    "end": { "offset": 1209, "line": 37, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1248, "line": 38, "column": 0 },
+                    "end": { "offset": 1248, "line": 38, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1278, "line": 39, "column": 0 },
+                    "end": { "offset": 1278, "line": 39, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1355, "line": 40, "column": 0 },
+                    "end": { "offset": 1355, "line": 40, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1408, "line": 41, "column": 0 },
+                    "end": { "offset": 1408, "line": 41, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1486, "line": 42, "column": 0 },
+                    "end": { "offset": 1486, "line": 42, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1532, "line": 43, "column": 0 },
+                    "end": { "offset": 1532, "line": 43, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1553, "line": 44, "column": 0 },
+                    "end": { "offset": 1553, "line": 44, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1594, "line": 45, "column": 0 },
+                    "end": { "offset": 1594, "line": 45, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1619, "line": 46, "column": 0 },
+                    "end": { "offset": 1619, "line": 46, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1670, "line": 47, "column": 0 },
+                    "end": { "offset": 1670, "line": 47, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1734, "line": 48, "column": 0 },
+                    "end": { "offset": 1734, "line": 48, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1750, "line": 49, "column": 0 },
+                    "end": { "offset": 1750, "line": 49, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1764, "line": 50, "column": 0 },
+                    "end": { "offset": 1764, "line": 50, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1776, "line": 51, "column": 0 },
+                    "end": { "offset": 1776, "line": 51, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1786, "line": 52, "column": 0 },
+                    "end": { "offset": 1786, "line": 52, "column": 0 },
+                    "text": ""
+                  }
+                }
+              ]
+            },
+            {
+              "metricsId": "maintainability-index",
+              "value": 46,
+              "level": "warning",
+              "comment": "This method has 46 maintainability index, below the minimum of 50 allowed.",
+              "context": []
+            }
+          ]
+        }
+      },
+      "issues": [],
+      "antiPatternCases": []
+    },
+    {
+      "path": "lib\\app\\modules\\auth\\views\\register_view.dart",
+      "fileMetrics": [
+        {
+          "metricsId": "technical-debt",
+          "value": 0.0,
+          "level": "none",
+          "comment": "This compilation unit has 0.0 swe hours of debt.",
+          "context": []
+        }
+      ],
+      "classes": {
+        "RegisterView": {
+          "codeSpan": {
+            "start": { "offset": 159, "line": 5, "column": 1 },
+            "end": { "offset": 3134, "line": 84, "column": 2 },
+            "text": "class RegisterView extends GetView<RegisterController> {\r\n  const RegisterView({super.key});\r\n\r\n  @override\r\n  Widget build(BuildContext context) {\r\n    return Scaffold(\r\n      appBar: AppBar(\r\n        title: const Text('Register'),\r\n        centerTitle: true,\r\n      ),\r\n      body: Padding(\r\n        padding: const EdgeInsets.all(16.0),\r\n        child: SingleChildScrollView(\r\n          child: Column(\r\n            mainAxisAlignment: MainAxisAlignment.center,\r\n            children: [\r\n              // Foto Profil\r\n              Obx(() => GestureDetector(\r\n                    onTap: controller.pickPhoto,\r\n                    child: CircleAvatar(\r\n                      radius: 60,\r\n                      backgroundColor: Colors.grey[200],\r\n                      backgroundImage: controller.photoFile.value != null\r\n                          ? FileImage(controller.photoFile.value!)\r\n                          : null,\r\n                      child: controller.photoFile.value == null\r\n                          ? Icon(\r\n                              Icons.camera_alt,\r\n                              size: 50,\r\n                              color: Colors.grey[700],\r\n                            )\r\n                          : null,\r\n                    ),\r\n                  )),\r\n              const SizedBox(height: 24),\r\n              TextField(\r\n                controller: controller.usernameController,\r\n                decoration: const InputDecoration(\r\n                  labelText: 'Username',\r\n                  border: OutlineInputBorder(),\r\n                ),\r\n              ),\r\n              const SizedBox(height: 16),\r\n              TextField(\r\n                controller: controller.emailController,\r\n                keyboardType: TextInputType.emailAddress,\r\n                decoration: const InputDecoration(\r\n                  labelText: 'Email',\r\n                  border: OutlineInputBorder(),\r\n                ),\r\n              ),\r\n              const SizedBox(height: 16),\r\n              TextField(\r\n                controller: controller.passwordController,\r\n                obscureText: true,\r\n                decoration: const InputDecoration(\r\n                  labelText: 'Password',\r\n                  border: OutlineInputBorder(),\r\n                ),\r\n              ),\r\n              const SizedBox(height: 24),\r\n              Obx(() => ElevatedButton(\r\n                    onPressed:\r\n                        controller.isLoading.value ? null : controller.register,\r\n                    child: controller.isLoading.value\r\n                        ? const CircularProgressIndicator(color: Colors.white)\r\n                        : const Text('Register'),\r\n                  )),\r\n              const SizedBox(height: 16),\r\n              TextButton(\r\n                onPressed: controller.goToLogin,\r\n                child: const Text('Sudah punya akun? Login'),\r\n              ),\r\n            ],\r\n          ),\r\n        ),\r\n      ),\r\n    );\r\n  }\r\n}"
+          },
+          "metrics": [
+            {
+              "metricsId": "number-of-methods",
+              "value": 2,
+              "unitType": "methods",
+              "level": "none",
+              "comment": "This class has 2 methods.",
+              "context": [
+                {
+                  "message": "constructor RegisterView increase metric value",
+                  "codeSpan": {
+                    "start": { "offset": 219, "line": 6, "column": 3 },
+                    "end": { "offset": 251, "line": 6, "column": 35 },
+                    "text": "const RegisterView({super.key});"
+                  }
+                },
+                {
+                  "message": "method build increase metric value",
+                  "codeSpan": {
+                    "start": { "offset": 270, "line": 9, "column": 3 },
+                    "end": { "offset": 3131, "line": 83, "column": 4 },
+                    "text": "Widget build(BuildContext context) {\r\n    return Scaffold(\r\n      appBar: AppBar(\r\n        title: const Text('Register'),\r\n        centerTitle: true,\r\n      ),\r\n      body: Padding(\r\n        padding: const EdgeInsets.all(16.0),\r\n        child: SingleChildScrollView(\r\n          child: Column(\r\n            mainAxisAlignment: MainAxisAlignment.center,\r\n            children: [\r\n              // Foto Profil\r\n              Obx(() => GestureDetector(\r\n                    onTap: controller.pickPhoto,\r\n                    child: CircleAvatar(\r\n                      radius: 60,\r\n                      backgroundColor: Colors.grey[200],\r\n                      backgroundImage: controller.photoFile.value != null\r\n                          ? FileImage(controller.photoFile.value!)\r\n                          : null,\r\n                      child: controller.photoFile.value == null\r\n                          ? Icon(\r\n                              Icons.camera_alt,\r\n                              size: 50,\r\n                              color: Colors.grey[700],\r\n                            )\r\n                          : null,\r\n                    ),\r\n                  )),\r\n              const SizedBox(height: 24),\r\n              TextField(\r\n                controller: controller.usernameController,\r\n                decoration: const InputDecoration(\r\n                  labelText: 'Username',\r\n                  border: OutlineInputBorder(),\r\n                ),\r\n              ),\r\n              const SizedBox(height: 16),\r\n              TextField(\r\n                controller: controller.emailController,\r\n                keyboardType: TextInputType.emailAddress,\r\n                decoration: const InputDecoration(\r\n                  labelText: 'Email',\r\n                  border: OutlineInputBorder(),\r\n                ),\r\n              ),\r\n              const SizedBox(height: 16),\r\n              TextField(\r\n                controller: controller.passwordController,\r\n                obscureText: true,\r\n                decoration: const InputDecoration(\r\n                  labelText: 'Password',\r\n                  border: OutlineInputBorder(),\r\n                ),\r\n              ),\r\n              const SizedBox(height: 24),\r\n              Obx(() => ElevatedButton(\r\n                    onPressed:\r\n                        controller.isLoading.value ? null : controller.register,\r\n                    child: controller.isLoading.value\r\n                        ? const CircularProgressIndicator(color: Colors.white)\r\n                        : const Text('Register'),\r\n                  )),\r\n              const SizedBox(height: 16),\r\n              TextButton(\r\n                onPressed: controller.goToLogin,\r\n                child: const Text('Sudah punya akun? Login'),\r\n              ),\r\n            ],\r\n          ),\r\n        ),\r\n      ),\r\n    );\r\n  }"
+                  }
+                }
+              ]
+            },
+            {
+              "metricsId": "weight-of-class",
+              "value": 0.5,
+              "level": "none",
+              "comment": "This class has a weight of 0.5.",
+              "context": [
+                {
+                  "message": "public constructor RegisterView decrease metric value",
+                  "codeSpan": {
+                    "start": { "offset": 219, "line": 6, "column": 3 },
+                    "end": { "offset": 251, "line": 6, "column": 35 },
+                    "text": "const RegisterView({super.key});"
+                  }
+                },
+                {
+                  "message": "functional method build increase metric value",
+                  "codeSpan": {
+                    "start": { "offset": 270, "line": 9, "column": 3 },
+                    "end": { "offset": 3131, "line": 83, "column": 4 },
+                    "text": "Widget build(BuildContext context) {\r\n    return Scaffold(\r\n      appBar: AppBar(\r\n        title: const Text('Register'),\r\n        centerTitle: true,\r\n      ),\r\n      body: Padding(\r\n        padding: const EdgeInsets.all(16.0),\r\n        child: SingleChildScrollView(\r\n          child: Column(\r\n            mainAxisAlignment: MainAxisAlignment.center,\r\n            children: [\r\n              // Foto Profil\r\n              Obx(() => GestureDetector(\r\n                    onTap: controller.pickPhoto,\r\n                    child: CircleAvatar(\r\n                      radius: 60,\r\n                      backgroundColor: Colors.grey[200],\r\n                      backgroundImage: controller.photoFile.value != null\r\n                          ? FileImage(controller.photoFile.value!)\r\n                          : null,\r\n                      child: controller.photoFile.value == null\r\n                          ? Icon(\r\n                              Icons.camera_alt,\r\n                              size: 50,\r\n                              color: Colors.grey[700],\r\n                            )\r\n                          : null,\r\n                    ),\r\n                  )),\r\n              const SizedBox(height: 24),\r\n              TextField(\r\n                controller: controller.usernameController,\r\n                decoration: const InputDecoration(\r\n                  labelText: 'Username',\r\n                  border: OutlineInputBorder(),\r\n                ),\r\n              ),\r\n              const SizedBox(height: 16),\r\n              TextField(\r\n                controller: controller.emailController,\r\n                keyboardType: TextInputType.emailAddress,\r\n                decoration: const InputDecoration(\r\n                  labelText: 'Email',\r\n                  border: OutlineInputBorder(),\r\n                ),\r\n              ),\r\n              const SizedBox(height: 16),\r\n              TextField(\r\n                controller: controller.passwordController,\r\n                obscureText: true,\r\n                decoration: const InputDecoration(\r\n                  labelText: 'Password',\r\n                  border: OutlineInputBorder(),\r\n                ),\r\n              ),\r\n              const SizedBox(height: 24),\r\n              Obx(() => ElevatedButton(\r\n                    onPressed:\r\n                        controller.isLoading.value ? null : controller.register,\r\n                    child: controller.isLoading.value\r\n                        ? const CircularProgressIndicator(color: Colors.white)\r\n                        : const Text('Register'),\r\n                  )),\r\n              const SizedBox(height: 16),\r\n              TextButton(\r\n                onPressed: controller.goToLogin,\r\n                child: const Text('Sudah punya akun? Login'),\r\n              ),\r\n            ],\r\n          ),\r\n        ),\r\n      ),\r\n    );\r\n  }"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "functions": {
+        "RegisterView.RegisterView": {
+          "codeSpan": {
+            "start": { "offset": 219, "line": 6, "column": 3 },
+            "end": { "offset": 251, "line": 6, "column": 35 },
+            "text": "const RegisterView({super.key});"
+          },
+          "metrics": [
+            {
+              "metricsId": "cyclomatic-complexity",
+              "value": 1,
+              "level": "none",
+              "comment": "This constructor has a cyclomatic complexity of 1.",
+              "context": []
+            },
+            {
+              "metricsId": "halstead-volume",
+              "value": 0.0,
+              "level": "none",
+              "comment": "This constructor has a halstead volume of 0.0.",
+              "context": []
+            },
+            {
+              "metricsId": "lines-of-code",
+              "value": 1,
+              "unitType": "line",
+              "level": "none",
+              "comment": "This constructor has 1 line of code.",
+              "context": []
+            },
+            {
+              "metricsId": "maximum-nesting-level",
+              "value": 0,
+              "level": "none",
+              "comment": "This constructor has a nesting level of 0.",
+              "context": []
+            },
+            {
+              "metricsId": "source-lines-of-code",
+              "value": 0,
+              "unitType": "lines",
+              "level": "none",
+              "comment": "This constructor has 0 source lines of code.",
+              "context": []
+            },
+            {
+              "metricsId": "maintainability-index",
+              "value": 100,
+              "level": "none",
+              "comment": "This constructor has 100 maintainability index.",
+              "context": []
+            }
+          ]
+        },
+        "RegisterView.build": {
+          "codeSpan": {
+            "start": { "offset": 270, "line": 9, "column": 3 },
+            "end": { "offset": 3131, "line": 83, "column": 4 },
+            "text": "Widget build(BuildContext context) {\r\n    return Scaffold(\r\n      appBar: AppBar(\r\n        title: const Text('Register'),\r\n        centerTitle: true,\r\n      ),\r\n      body: Padding(\r\n        padding: const EdgeInsets.all(16.0),\r\n        child: SingleChildScrollView(\r\n          child: Column(\r\n            mainAxisAlignment: MainAxisAlignment.center,\r\n            children: [\r\n              // Foto Profil\r\n              Obx(() => GestureDetector(\r\n                    onTap: controller.pickPhoto,\r\n                    child: CircleAvatar(\r\n                      radius: 60,\r\n                      backgroundColor: Colors.grey[200],\r\n                      backgroundImage: controller.photoFile.value != null\r\n                          ? FileImage(controller.photoFile.value!)\r\n                          : null,\r\n                      child: controller.photoFile.value == null\r\n                          ? Icon(\r\n                              Icons.camera_alt,\r\n                              size: 50,\r\n                              color: Colors.grey[700],\r\n                            )\r\n                          : null,\r\n                    ),\r\n                  )),\r\n              const SizedBox(height: 24),\r\n              TextField(\r\n                controller: controller.usernameController,\r\n                decoration: const InputDecoration(\r\n                  labelText: 'Username',\r\n                  border: OutlineInputBorder(),\r\n                ),\r\n              ),\r\n              const SizedBox(height: 16),\r\n              TextField(\r\n                controller: controller.emailController,\r\n                keyboardType: TextInputType.emailAddress,\r\n                decoration: const InputDecoration(\r\n                  labelText: 'Email',\r\n                  border: OutlineInputBorder(),\r\n                ),\r\n              ),\r\n              const SizedBox(height: 16),\r\n              TextField(\r\n                controller: controller.passwordController,\r\n                obscureText: true,\r\n                decoration: const InputDecoration(\r\n                  labelText: 'Password',\r\n                  border: OutlineInputBorder(),\r\n                ),\r\n              ),\r\n              const SizedBox(height: 24),\r\n              Obx(() => ElevatedButton(\r\n                    onPressed:\r\n                        controller.isLoading.value ? null : controller.register,\r\n                    child: controller.isLoading.value\r\n                        ? const CircularProgressIndicator(color: Colors.white)\r\n                        : const Text('Register'),\r\n                  )),\r\n              const SizedBox(height: 16),\r\n              TextButton(\r\n                onPressed: controller.goToLogin,\r\n                child: const Text('Sudah punya akun? Login'),\r\n              ),\r\n            ],\r\n          ),\r\n        ),\r\n      ),\r\n    );\r\n  }"
+          },
+          "metrics": [
+            {
+              "metricsId": "cyclomatic-complexity",
+              "value": 5,
+              "level": "none",
+              "comment": "This method has a cyclomatic complexity of 5.",
+              "context": [
+                {
+                  "message": "Conditional expression increases complexity",
+                  "codeSpan": {
+                    "start": { "offset": 943, "line": 27, "column": 40 },
+                    "end": { "offset": 1079, "line": 29, "column": 33 },
+                    "text": "controller.photoFile.value != null\r\n                          ? FileImage(controller.photoFile.value!)\r\n                          : null"
+                  }
+                },
+                {
+                  "message": "Conditional expression increases complexity",
+                  "codeSpan": {
+                    "start": { "offset": 1111, "line": 30, "column": 30 },
+                    "end": { "offset": 1391, "line": 36, "column": 33 },
+                    "text": "controller.photoFile.value == null\r\n                          ? Icon(\r\n                              Icons.camera_alt,\r\n                              size: 50,\r\n                              color: Colors.grey[700],\r\n                            )\r\n                          : null"
+                  }
+                },
+                {
+                  "message": "Conditional expression increases complexity",
+                  "codeSpan": {
+                    "start": { "offset": 2600, "line": 68, "column": 25 },
+                    "end": { "offset": 2655, "line": 68, "column": 80 },
+                    "text": "controller.isLoading.value ? null : controller.register"
+                  }
+                },
+                {
+                  "message": "Conditional expression increases complexity",
+                  "codeSpan": {
+                    "start": { "offset": 2685, "line": 69, "column": 28 },
+                    "end": { "offset": 2841, "line": 71, "column": 49 },
+                    "text": "controller.isLoading.value\r\n                        ? const CircularProgressIndicator(color: Colors.white)\r\n                        : const Text('Register')"
+                  }
+                }
+              ]
+            },
+            {
+              "metricsId": "halstead-volume",
+              "value": 1032.0,
+              "level": "none",
+              "comment": "This method has a halstead volume of 1032.0.",
+              "context": []
+            },
+            {
+              "metricsId": "lines-of-code",
+              "value": 76,
+              "unitType": "lines",
+              "level": "none",
+              "comment": "This method has 76 lines of code.",
+              "context": []
+            },
+            {
+              "metricsId": "maximum-nesting-level",
+              "value": 1,
+              "level": "none",
+              "comment": "This method has a nesting level of 1.",
+              "context": [
+                {
+                  "message": "Block function body increases depth",
+                  "codeSpan": {
+                    "start": { "offset": 305, "line": 9, "column": 38 },
+                    "end": { "offset": 3131, "line": 83, "column": 4 },
+                    "text": "{\r\n    return Scaffold(\r\n      appBar: AppBar(\r\n        title: const Text('Register'),\r\n        centerTitle: true,\r\n      ),\r\n      body: Padding(\r\n        padding: const EdgeInsets.all(16.0),\r\n        child: SingleChildScrollView(\r\n          child: Column(\r\n            mainAxisAlignment: MainAxisAlignment.center,\r\n            children: [\r\n              // Foto Profil\r\n              Obx(() => GestureDetector(\r\n                    onTap: controller.pickPhoto,\r\n                    child: CircleAvatar(\r\n                      radius: 60,\r\n                      backgroundColor: Colors.grey[200],\r\n                      backgroundImage: controller.photoFile.value != null\r\n                          ? FileImage(controller.photoFile.value!)\r\n                          : null,\r\n                      child: controller.photoFile.value == null\r\n                          ? Icon(\r\n                              Icons.camera_alt,\r\n                              size: 50,\r\n                              color: Colors.grey[700],\r\n                            )\r\n                          : null,\r\n                    ),\r\n                  )),\r\n              const SizedBox(height: 24),\r\n              TextField(\r\n                controller: controller.usernameController,\r\n                decoration: const InputDecoration(\r\n                  labelText: 'Username',\r\n                  border: OutlineInputBorder(),\r\n                ),\r\n              ),\r\n              const SizedBox(height: 16),\r\n              TextField(\r\n                controller: controller.emailController,\r\n                keyboardType: TextInputType.emailAddress,\r\n                decoration: const InputDecoration(\r\n                  labelText: 'Email',\r\n                  border: OutlineInputBorder(),\r\n                ),\r\n              ),\r\n              const SizedBox(height: 16),\r\n              TextField(\r\n                controller: controller.passwordController,\r\n                obscureText: true,\r\n                decoration: const InputDecoration(\r\n                  labelText: 'Password',\r\n                  border: OutlineInputBorder(),\r\n                ),\r\n              ),\r\n              const SizedBox(height: 24),\r\n              Obx(() => ElevatedButton(\r\n                    onPressed:\r\n                        controller.isLoading.value ? null : controller.register,\r\n                    child: controller.isLoading.value\r\n                        ? const CircularProgressIndicator(color: Colors.white)\r\n                        : const Text('Register'),\r\n                  )),\r\n              const SizedBox(height: 16),\r\n              TextButton(\r\n                onPressed: controller.goToLogin,\r\n                child: const Text('Sudah punya akun? Login'),\r\n              ),\r\n            ],\r\n          ),\r\n        ),\r\n      ),\r\n    );\r\n  }"
+                  }
+                }
+              ]
+            },
+            {
+              "metricsId": "number-of-parameters",
+              "value": 1,
+              "level": "none",
+              "comment": "This method has 1 parameter.",
+              "context": []
+            },
+            {
+              "metricsId": "source-lines-of-code",
+              "value": 72,
+              "unitType": "lines",
+              "level": "none",
+              "comment": "This method has 72 source lines of code.",
+              "context": [
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 308, "line": 10, "column": 0 },
+                    "end": { "offset": 308, "line": 10, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 330, "line": 11, "column": 0 },
+                    "end": { "offset": 330, "line": 11, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 353, "line": 12, "column": 0 },
+                    "end": { "offset": 353, "line": 12, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 393, "line": 13, "column": 0 },
+                    "end": { "offset": 393, "line": 13, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 421, "line": 14, "column": 0 },
+                    "end": { "offset": 421, "line": 14, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 431, "line": 15, "column": 0 },
+                    "end": { "offset": 431, "line": 15, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 453, "line": 16, "column": 0 },
+                    "end": { "offset": 453, "line": 16, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 499, "line": 17, "column": 0 },
+                    "end": { "offset": 499, "line": 17, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 538, "line": 18, "column": 0 },
+                    "end": { "offset": 538, "line": 18, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 564, "line": 19, "column": 0 },
+                    "end": { "offset": 564, "line": 19, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 622, "line": 20, "column": 0 },
+                    "end": { "offset": 622, "line": 20, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 677, "line": 22, "column": 0 },
+                    "end": { "offset": 677, "line": 22, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 719, "line": 23, "column": 0 },
+                    "end": { "offset": 719, "line": 23, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 769, "line": 24, "column": 0 },
+                    "end": { "offset": 769, "line": 24, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 811, "line": 25, "column": 0 },
+                    "end": { "offset": 811, "line": 25, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 846, "line": 26, "column": 0 },
+                    "end": { "offset": 846, "line": 26, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 904, "line": 27, "column": 0 },
+                    "end": { "offset": 904, "line": 27, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 979, "line": 28, "column": 0 },
+                    "end": { "offset": 979, "line": 28, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1047, "line": 29, "column": 0 },
+                    "end": { "offset": 1047, "line": 29, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1082, "line": 30, "column": 0 },
+                    "end": { "offset": 1082, "line": 30, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1147, "line": 31, "column": 0 },
+                    "end": { "offset": 1147, "line": 31, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1182, "line": 32, "column": 0 },
+                    "end": { "offset": 1182, "line": 32, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1231, "line": 33, "column": 0 },
+                    "end": { "offset": 1231, "line": 33, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1272, "line": 34, "column": 0 },
+                    "end": { "offset": 1272, "line": 34, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1328, "line": 35, "column": 0 },
+                    "end": { "offset": 1328, "line": 35, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1359, "line": 36, "column": 0 },
+                    "end": { "offset": 1359, "line": 36, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1394, "line": 37, "column": 0 },
+                    "end": { "offset": 1394, "line": 37, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1418, "line": 38, "column": 0 },
+                    "end": { "offset": 1418, "line": 38, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1441, "line": 39, "column": 0 },
+                    "end": { "offset": 1441, "line": 39, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1484, "line": 40, "column": 0 },
+                    "end": { "offset": 1484, "line": 40, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1510, "line": 41, "column": 0 },
+                    "end": { "offset": 1510, "line": 41, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1570, "line": 42, "column": 0 },
+                    "end": { "offset": 1570, "line": 42, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1622, "line": 43, "column": 0 },
+                    "end": { "offset": 1622, "line": 43, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1664, "line": 44, "column": 0 },
+                    "end": { "offset": 1664, "line": 44, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1713, "line": 45, "column": 0 },
+                    "end": { "offset": 1713, "line": 45, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1733, "line": 46, "column": 0 },
+                    "end": { "offset": 1733, "line": 46, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1751, "line": 47, "column": 0 },
+                    "end": { "offset": 1751, "line": 47, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1794, "line": 48, "column": 0 },
+                    "end": { "offset": 1794, "line": 48, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1820, "line": 49, "column": 0 },
+                    "end": { "offset": 1820, "line": 49, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1877, "line": 50, "column": 0 },
+                    "end": { "offset": 1877, "line": 50, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1936, "line": 51, "column": 0 },
+                    "end": { "offset": 1936, "line": 51, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 1988, "line": 52, "column": 0 },
+                    "end": { "offset": 1988, "line": 52, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 2027, "line": 53, "column": 0 },
+                    "end": { "offset": 2027, "line": 53, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 2076, "line": 54, "column": 0 },
+                    "end": { "offset": 2076, "line": 54, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 2096, "line": 55, "column": 0 },
+                    "end": { "offset": 2096, "line": 55, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 2114, "line": 56, "column": 0 },
+                    "end": { "offset": 2114, "line": 56, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 2157, "line": 57, "column": 0 },
+                    "end": { "offset": 2157, "line": 57, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 2183, "line": 58, "column": 0 },
+                    "end": { "offset": 2183, "line": 58, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 2243, "line": 59, "column": 0 },
+                    "end": { "offset": 2243, "line": 59, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 2279, "line": 60, "column": 0 },
+                    "end": { "offset": 2279, "line": 60, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 2331, "line": 61, "column": 0 },
+                    "end": { "offset": 2331, "line": 61, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 2373, "line": 62, "column": 0 },
+                    "end": { "offset": 2373, "line": 62, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 2422, "line": 63, "column": 0 },
+                    "end": { "offset": 2422, "line": 63, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 2442, "line": 64, "column": 0 },
+                    "end": { "offset": 2442, "line": 64, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 2460, "line": 65, "column": 0 },
+                    "end": { "offset": 2460, "line": 65, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 2503, "line": 66, "column": 0 },
+                    "end": { "offset": 2503, "line": 66, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 2544, "line": 67, "column": 0 },
+                    "end": { "offset": 2544, "line": 67, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 2576, "line": 68, "column": 0 },
+                    "end": { "offset": 2576, "line": 68, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 2658, "line": 69, "column": 0 },
+                    "end": { "offset": 2658, "line": 69, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 2713, "line": 70, "column": 0 },
+                    "end": { "offset": 2713, "line": 70, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 2793, "line": 71, "column": 0 },
+                    "end": { "offset": 2793, "line": 71, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 2844, "line": 72, "column": 0 },
+                    "end": { "offset": 2844, "line": 72, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 2867, "line": 73, "column": 0 },
+                    "end": { "offset": 2867, "line": 73, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 2910, "line": 74, "column": 0 },
+                    "end": { "offset": 2910, "line": 74, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 2937, "line": 75, "column": 0 },
+                    "end": { "offset": 2937, "line": 75, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 2987, "line": 76, "column": 0 },
+                    "end": { "offset": 2987, "line": 76, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 3050, "line": 77, "column": 0 },
+                    "end": { "offset": 3050, "line": 77, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 3068, "line": 78, "column": 0 },
+                    "end": { "offset": 3068, "line": 78, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 3084, "line": 79, "column": 0 },
+                    "end": { "offset": 3084, "line": 79, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 3098, "line": 80, "column": 0 },
+                    "end": { "offset": 3098, "line": 80, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 3110, "line": 81, "column": 0 },
+                    "end": { "offset": 3110, "line": 81, "column": 0 },
+                    "text": ""
+                  }
+                },
+                {
+                  "message": "line contains source code",
+                  "codeSpan": {
+                    "start": { "offset": 3120, "line": 82, "column": 0 },
+                    "end": { "offset": 3120, "line": 82, "column": 0 },
+                    "text": ""
+                  }
+                }
+              ]
+            },
+            {
+              "metricsId": "maintainability-index",
+              "value": 38,
+              "level": "warning",
+              "comment": "This method has 38 maintainability index, below the minimum of 50 allowed.",
+              "context": []
+            }
+          ]
+        }
+      },
+      "issues": [],
+      "antiPatternCases": []
+    }
+  ],
+  "summary": [
+    {
+      "status": "none",
+      "title": "Scanned folders",
+      "value": ["lib"],
+      "violations": 0
+    },
+    {
+      "status": "none",
+      "title": "Total scanned files",
+      "value": 6,
+      "violations": 0
+    },
+    {
+      "status": "none",
+      "title": "Total lines of source code",
+      "value": 179,
+      "violations": 0
+    },
+    { "status": "none", "title": "Total classes", "value": 6, "violations": 0 },
+    {
+      "status": "none",
+      "title": "Average Cyclomatic Number per line of code",
+      "value": 0.1564245810055866,
+      "violations": 0
+    },
+    {
+      "status": "none",
+      "title": "Average Source Lines of Code per method",
+      "value": 13,
+      "violations": 0
+    },
+    {
+      "status": "none",
+      "title": "Total tech debt",
+      "value": "not found",
+      "violations": 0
+    }
+  ]
+}

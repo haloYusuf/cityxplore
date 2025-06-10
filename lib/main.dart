@@ -71,7 +71,11 @@ Future<void> _requestNotificationPermissions() async {
 }
 
 void onDidReceiveLocalNotification(
-    int id, String? title, String? body, String? payload) async {
+  int id,
+  String? title,
+  String? body,
+  String? payload,
+) async {
   Get.dialog(
     AlertDialog(
       title: Text(title ?? ''),
@@ -87,7 +91,8 @@ void onDidReceiveLocalNotification(
 }
 
 void onDidReceiveNotificationResponse(
-    NotificationResponse notificationResponse) async {
+  NotificationResponse notificationResponse,
+) async {
   final dbHelper = Get.find<DbHelper>();
   // 1. Periksa apakah ada payload
   if (notificationResponse.payload != null &&

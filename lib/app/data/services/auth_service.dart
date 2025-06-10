@@ -40,14 +40,20 @@ class AuthService extends GetxService {
   }) async {
     final existingUserByUsername = await _dbHelper.getUserByUsername(username);
     if (existingUserByUsername != null) {
-      Get.snackbar('Register Gagal', 'Username sudah digunakan.',
-          snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar(
+        'Register Gagal',
+        'Username sudah digunakan.',
+        snackPosition: SnackPosition.BOTTOM,
+      );
       return false;
     }
     final existingUserByEmail = await _dbHelper.getUserByEmail(email);
     if (existingUserByEmail != null) {
-      Get.snackbar('Register Gagal', 'Email sudah terdaftar.',
-          snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar(
+        'Register Gagal',
+        'Email sudah terdaftar.',
+        snackPosition: SnackPosition.BOTTOM,
+      );
       return false;
     }
 
@@ -71,17 +77,23 @@ class AuthService extends GetxService {
       if (uid > 0) {
         _currentUser.value = newUser..uid = uid;
         _box.write(_userUidKey, uid);
-        Get.snackbar('Sukses', 'Registrasi Berhasil!',
-            snackPosition: SnackPosition.BOTTOM,
-            backgroundColor: Colors.green,
-            colorText: Colors.white);
+        Get.snackbar(
+          'Sukses',
+          'Registrasi Berhasil!',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+        );
         return true;
       }
     } catch (e) {
-      Get.snackbar('Error', 'Registrasi Gagal: $e',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red,
-          colorText: Colors.white);
+      Get.snackbar(
+        'Error',
+        'Registrasi Gagal: $e',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
     }
     return false;
   }
@@ -93,22 +105,31 @@ class AuthService extends GetxService {
     final user = await _dbHelper.getUserByUsername(username);
 
     if (user == null) {
-      Get.snackbar('Login Gagal', 'Username tidak ditemukan.',
-          snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar(
+        'Login Gagal',
+        'Username tidak ditemukan.',
+        snackPosition: SnackPosition.BOTTOM,
+      );
       return false;
     }
 
     if (PasswordUtil.verifyPassword(password, user.password)) {
       _currentUser.value = user;
       _box.write(_userUidKey, user.uid);
-      Get.snackbar('Login Sukses', 'Selamat datang, ${user.username}!',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.green,
-          colorText: Colors.white);
+      Get.snackbar(
+        'Login Sukses',
+        'Selamat datang, ${user.username}!',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.green,
+        colorText: Colors.white,
+      );
       return true;
     } else {
-      Get.snackbar('Login Gagal', 'Password salah.',
-          snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar(
+        'Login Gagal',
+        'Password salah.',
+        snackPosition: SnackPosition.BOTTOM,
+      );
       return false;
     }
   }
@@ -116,7 +137,10 @@ class AuthService extends GetxService {
   void logout() {
     _currentUser.value = null;
     _box.remove(_userUidKey);
-    Get.snackbar('Logout', 'Anda telah keluar.',
-        snackPosition: SnackPosition.BOTTOM);
+    Get.snackbar(
+      'Logout',
+      'Anda telah keluar.',
+      snackPosition: SnackPosition.BOTTOM,
+    );
   }
 }
