@@ -9,7 +9,7 @@ class ApiService {
   final _addressUrl = 'https://nominatim.openstreetmap.org';
   final _timeUrl = 'https://api.ipgeolocation.io/v2';
   final _exchangeRateUrl = 'https://api.exchangerate-api.com/v4/latest';
-  final _apiKey = 'e2c749c66cf040908d7452d2445a2b70';
+  final _apiKey = '#ONLY ME WHO KNOW';
 
   Future<String> getDetailAddress({
     required String latitude,
